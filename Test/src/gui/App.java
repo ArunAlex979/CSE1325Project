@@ -1,5 +1,7 @@
+package gui;
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        String s = "World";
+        System.out.printf("Hello %s!",s);
     }
 }
