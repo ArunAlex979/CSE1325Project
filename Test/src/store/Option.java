@@ -1,18 +1,13 @@
 package store;
 
-import java.util.ArrayList;
-
-public class Product {
-    
+public class Option{
     private String name;
     private long basePrice;
-    private ArrayList<Option> modifications = new ArrayList<Option>();
 
-    public Product(String name, long basePrice){
+    public Option(String name, long basePrice){
         this.name = name;
         this.basePrice = basePrice;
     }
-
 
     public long price(){
         return 0;
