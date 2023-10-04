@@ -36,18 +36,31 @@ public class TerminalWindow extends JFrame{
         //////////////////////////////////////////////////
         // Admin Panel ///////////////////////////////////
 
+        // Create Toolbar
+        JToolBar toolbar = new JToolBar("Icy Delights Toolbar");
+        toolbar.setOrientation(1);
+        toolbar.add(Box.createVerticalGlue());
+        
         // Create Fields
-        JButton pastOrdersButton = new JButton("");
-        JButton customerInfoButton = new JButton("");
-        JButton inventoryButton = new JButton("");
-        JButton logoutButton = new JButton("");
+        JButton customerInfoButton = new JButton("Customer Info");
+        JButton inventoryButton    = new JButton("Inventory");
+        JButton logoutButton       = new JButton("Logout");
+        JButton pastOrdersButton   = new JButton("Past Orders");
+        
+
         // Add Listeners
-        adminButton   .addActionListener(event -> onAdminClick());
-        customerButton.addActionListener(event -> onCustomerClick());
+        customerInfoButton.addActionListener(event -> onCustomerInfoClick());
+        inventoryButton   .addActionListener(event -> onInventoryClick());
+        logoutButton      .addActionListener(event -> onLogoutClick());
+        pastOrdersButton  .addActionListener(event -> onPastOrdersClick());
 
         // Add Buttons
-        bootPanel.add(adminButton);
-        bootPanel.add(customerButton);
+        toolbar   .add(customerInfoButton);
+        toolbar   .add(inventoryButton);
+        toolbar   .add(logoutButton);
+        toolbar   .add(pastOrdersButton);
+        adminPanel.add(toolbar, BorderLayout.PAGE_START);
+
 
         //////////////////////////////////////////////////
         // Boot Panel ////////////////////////////////////
@@ -67,12 +80,19 @@ public class TerminalWindow extends JFrame{
 
         //////////////////////////////////////////////////
         // Customer Panel ////////////////////////////////
+ 
+       // Create Fields
+        JButton iceCreamButton    = new JButton("Ice Cream");
+        
+        // Add Listeners
+        iceCreamButton   .addActionListener(event -> onLogoutClick());
 
+        // Add Buttons
+        customerPanel.add(iceCreamButton);
 
         setActivePanel(bootPanel);
 
-        this.add(activePanel);
-        this.setVisible(true);
+        
         this.setSize(800,400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -87,19 +107,46 @@ public class TerminalWindow extends JFrame{
     }
 
     private void setActivePanel(JPanel panel){
-        activePanel.removeAll();
+        this.remove(activePanel);
         this.activePanel = panel;
+        this.add(activePanel);
+        this.setVisible(true);
+        this.repaint();
     }
 
     protected void onAdminClick(){
-        // Reset Panel
-        this.remove(activePanel);
-        this.repaint();
 
         System.out.println("Admin Button Clicked");
+
+        setActivePanel(adminPanel);
+    }
+    protected void onPastOrdersClick(){
         
+        System.out.println("Past Orders Button Clicked");
+
+    }
+    protected void onCustomerInfoClick(){
+        
+        System.out.println("Customer Info Button Clicked");
+
+        setActivePanel(customerPanel);
+    }
+    protected void onInventoryClick(){
+        
+        System.out.println("Inventory Button Clicked");
+
+    }
+    protected void onLogoutClick(){
+        
+        System.out.println("Logout Button Clicked");
+
+        setActivePanel(bootPanel);
+
     }
     protected void onCustomerClick(){
+
         System.out.println("Customer Button Clicked");
+
+        setActivePanel(customerPanel);
     }
 }
