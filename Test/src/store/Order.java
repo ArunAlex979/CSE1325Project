@@ -2,7 +2,7 @@ package store;
 
 import java.util.ArrayList;
 
-public class Order {
+public class Order{
     private static long nextOrderUmber = 1;
 
     private long orderNumber;
@@ -15,10 +15,14 @@ public class Order {
 
     public void addProduct(Product product){
         this.products.add(product);
+        
     }
+
+    
 
     @Override
     public String toString(){
         return String.format("%d", orderNumber);
     }
+    
 }
