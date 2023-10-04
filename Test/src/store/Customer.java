@@ -1,13 +1,15 @@
 package store;
 
+import java.util.ArrayList;
+
 public class Customer {
     
     private String firstName;
     private String lastName;
     private String email;
     private short phoneNumber;
-
-    public long rewardPonts;
+    public long rewardPoints;
+    private ArrayList<Long> previousOrders = new ArrayList<Long>();
 
     public Customer(){
         this.firstName = "Guest";
@@ -20,6 +22,15 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public void addOrder(long orderNumber, long rewardPoints){
+        this.previousOrders.add(orderNumber);
+        this.rewardPoints += rewardPoints;
+    }
+
+    public void useReward(long rewardPoints){
+        this.rewardPoints -= rewardPoints;
+    }
+    
     @Override
     public String toString(){
         if(firstName.equals("Guest"))

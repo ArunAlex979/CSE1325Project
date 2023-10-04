@@ -5,21 +5,36 @@ import java.util.ArrayList;
 public class Product {
     
     private String name;
-    private long basePrice;
-    private ArrayList<Option> modifications = new ArrayList<Option>();
+    private long price;
+    private ItemType itemType;
+    private ArrayList<Item> ingredients = new ArrayList<Item>();
 
-    public Product(String name, long basePrice){
+    public Product(String name, ArrayList<Item> ingredients, ItemType itemType){
         this.name = name;
-        this.basePrice = basePrice;
+        this.price = 0;
+        for(int x =0;x<ingredients.size();x++){
+            this.ingredients.add(ingredients.get(x));
+            price += ingredients.get(x).getPrice();
+        }
+        this.itemType = itemType;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Variable Retrival Methods ///////////////////////////////////////////////////
 
-    public long price(){
-        return 0;
+    public Object getIngrediets(){
+        return this.ingredients.toArray();
     }
+    public long getPrice(){
+        return price;
+    }
+    public ItemType getItemType(){
+        return itemType;
+    }
+
 
     @Override
     public String toString(){
-        return this.name;
+        return String.format("%s $%.2f",this.name, this.price/100.0);
     }
 }

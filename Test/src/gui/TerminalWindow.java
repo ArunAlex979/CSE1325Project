@@ -128,8 +128,7 @@ public class TerminalWindow extends JFrame{
     protected void onCustomerInfoClick(){
         
         System.out.println("Customer Info Button Clicked");
-
-        setActivePanel(customerPanel);
+        
     }
     protected void onInventoryClick(){
         
