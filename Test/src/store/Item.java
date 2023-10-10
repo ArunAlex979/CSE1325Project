@@ -15,6 +15,8 @@ public class Item {
         this.price = price;
         this.itemType = itemType;
         this.amountInStock = amountInStock;
+
+        this.binNumber = nextBinNumber++;
     }
 
     public long getPrice(){
