@@ -30,11 +30,11 @@ public class Customer {
     public void useReward(long rewardPoints){
         this.rewardPoints -= rewardPoints;
     }
-    
+
     @Override
     public String toString(){
         if(firstName.equals("Guest"))
-            return String.format("%s",firstName);
+            return String.format("%s test",firstName);
         else
             return String.format("%-5s, %-5 %-10s %d",lastName, firstName, email, phoneNumber);
     }

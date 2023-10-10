@@ -2,9 +2,9 @@ package store;
 
 public class Item {
 
-    private static long nextBinNumber = 1;
+    private static int nextBinNumber = 1;
 
-    private long binNumber;
+    private int binNumber;
     private long amountInStock;
     private long price;
     private String label;
@@ -25,6 +25,6 @@ public class Item {
 
     @Override
     public String toString(){
-        return String.format("%s %-5s %s %s %s",binNumber,label,price, itemType, amountInStock);
+        return String.format("%04d %-15s %-4s %-15s %s",binNumber,label,price, itemType, amountInStock);
     }
 }
