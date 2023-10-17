@@ -5,7 +5,6 @@ import store.*;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.image.*;
 
 import java.io.*;
 
@@ -13,37 +12,29 @@ public class TerminalWindow extends JFrame{
     
     private Store store;
     private JLabel display;
-    private File fileName;
+    private File fileName = new File("TestFile.txt");
 
     private JPanel activePanel;
     private JPanel bootPanel;
     private JPanel adminPanel;
     private JPanel customerPanel;
     private JPanel inventoryPanel;
+    private JPanel menuPanel;
+    private JPanel productPanel;
 
-    private JFrame newItemFrame;
+    private JButton returnButton;
+    private JButton addItemButton;
 
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Image logo = tk.getImage("Test/src/gui/recources/logo.png");
+    
     public TerminalWindow(String name){
-        
-        
 
-        // Set up JFrame
-        this.setName(name);
-        this.setIconImage(logo);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Admin Panel /////////////////////////////////////////////////////////////////////////////////////
 
-        // Initialize Panels
-        activePanel    = new JPanel();
-        adminPanel     = new JPanel();
-        bootPanel      = new JPanel();
-        customerPanel  = new JPanel();
-        inventoryPanel = new JPanel();
+        adminPanel = new JPanel();
 
-        //////////////////////////////////////////////////
-        // Admin Panel ///////////////////////////////////
-
-        // Create Toolbar
         JToolBar toolbar = new JToolBar("Icy Delights Toolbar");
         toolbar.setOrientation(1);
         toolbar.add(Box.createVerticalGlue());
@@ -53,25 +44,32 @@ public class TerminalWindow extends JFrame{
         JButton inventoryButton    = new JButton("Inventory");
         JButton logoutButton       = new JButton("Logout");
         JButton pastOrdersButton   = new JButton("Past Orders");
-        
+        JButton saveButton         = new JButton("Save");
+        JButton loadButton         = new JButton("Load");
 
         // Add Listeners
         customerInfoButton.addActionListener(event -> onCustomerInfoClick());
         inventoryButton   .addActionListener(event -> onInventoryClick());
         logoutButton      .addActionListener(event -> onLogoutClick());
         pastOrdersButton  .addActionListener(event -> onPastOrdersClick());
+        saveButton        .addActionListener(event -> onSaveClick());
+        loadButton        .addActionListener(event -> onLoadClick());
 
         // Add Buttons
         toolbar   .add(customerInfoButton);
         toolbar   .add(inventoryButton);
         toolbar   .add(logoutButton);
         toolbar   .add(pastOrdersButton);
+        toolbar   .add(saveButton);
+        toolbar   .add(loadButton);
         adminPanel.add(toolbar, BorderLayout.PAGE_START);
+        
 
 
-        //////////////////////////////////////////////////
-        // Boot Panel ////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Boot Panel //////////////////////////////////////////////////////////////////////////////////////
 
+        bootPanel = new JPanel();
 
         // Create Fields
         JButton adminButton    = new JButton("Admin");
@@ -85,22 +83,65 @@ public class TerminalWindow extends JFrame{
         bootPanel.add(adminButton);
         bootPanel.add(customerButton);
 
-        //////////////////////////////////////////////////
-        // Customer Panel ////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Customer Panel //////////////////////////////////////////////////////////////////////////////////
  
-       // Create Fields
+        // Setup Panel
+        customerPanel  = new JPanel();
+
+        // Create Fields
         JButton iceCreamButton    = new JButton("Ice Cream");
-        
+
         // Add Listeners
         iceCreamButton   .addActionListener(event -> onLogoutClick());
 
         // Add Buttons
         customerPanel.add(iceCreamButton);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Inventory Panel /////////////////////////////////////////////////////////////////////////////////
+
+        //Set Up Panel
+        inventoryPanel = new JPanel();
+        inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
+
+        //Create fields
+        returnButton = new JButton("Return");
+        addItemButton = new JButton("Add Item");
+
+        // Add Listeners
+        returnButton.addActionListener(event -> setActivePanel(adminPanel));
+        addItemButton.addActionListener(event -> onNewItemClick());
+
+        //Add Fields
+        inventoryPanel.add(new JLabel(String.format("%-7s %-15s %-4s %-15s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
+        inventoryPanel.add(addItemButton);
+        inventoryPanel.add(returnButton,JPanel.BOTTOM_ALIGNMENT);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Product Panel /////////////////////////////////////////////////////////////////////////////////// 
+
+        // Setup Panel
+        // productPanel = new JPanel ();
+        // productPanel.setLayout(new BoxLayout(productPanel, BoxLayout.Y_AXIS));
+
+        // Create Fields
+        
+        
+        
+        // Add Listeners
+        
+
+        // Add Buttons
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Set up JFrame /////////////////////////////////////////////////////////////////////////////////// 
+
+        activePanel    = new JPanel();
         store = new Store(name);
-
         setActivePanel(bootPanel);
-
+        this.setName(name);
+        this.setIconImage(logo);
         this.setSize(800,400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -109,11 +150,32 @@ public class TerminalWindow extends JFrame{
 
     public TerminalWindow(Store store){
         this(store.name());
+    }
 
-        this.store = store;
+    protected void onSaveClick(){
+        System.out.println("Save Button Clicked");
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+            store.save(bw);
+            bw.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Unable to can " + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
+        }
         
     }
 
+    protected void onLoadClick(){
+        System.out.println("Load Button Clicked");
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            store.close();
+            store.load(br);
+            br.close();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Unable to can " + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
     private void setActivePanel(JPanel panel){
         this.remove(activePanel);
         this.activePanel = panel;
@@ -141,15 +203,13 @@ public class TerminalWindow extends JFrame{
     protected void onInventoryClick(){
         
         System.out.println("Inventory Button Clicked");
+        inventoryPanel = new JPanel();
+        updateInventoryPanel();
 
-        onNewItemClick();
+        setActivePanel(inventoryPanel);
 
-        repaintInventoryPanel();
-
-        adminPanel.add(inventoryPanel,CENTER_ALIGNMENT);
-        adminPanel.repaint();
-        this.repaint();
         Object [] inventory = store.inventory();
+        System.out.printf("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity");
         for(int x = 0;x<inventory.length;x++){
             System.out.println(inventory[x]);
         }
@@ -168,30 +228,82 @@ public class TerminalWindow extends JFrame{
 
         setActivePanel(customerPanel);
     }
+    protected void onProductsClick(){
+
+        System.out.println("Products Button Clicked");
+
+        setActivePanel(productPanel);
+    }
 
     protected void onNewItemClick(){
         Object [] itemTypes = {ItemType.CONSUMABLE,ItemType.SUPPLIES,ItemType.MERCHANDISE};
+
         JTextField itemName = new JTextField();
         JTextField itemPrice = new JTextField();
         JTextField numberInStock = new JTextField();
+
         JComboBox<ItemType> itemType = new JComboBox(itemTypes);
+
         Object [] infoNeeded = {"Item Name",itemName,"Item Price",itemPrice,"Item Type",itemType,"Number in Stock", numberInStock};
-        //int button = JOptionPane.showInputDialog(this, infoNeeded, "New Computer", JOptionPane.OK_CANCEL_OPTION);
+        
         int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Item", JOptionPane.OK_CANCEL_OPTION);
+        
         if(button == JOptionPane.OK_OPTION){
-            store.add(new Item(itemName.getText(),Long.parseLong(itemPrice.getText()),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
+            store.add(new Item(itemName.getText(),Integer.parseInt(itemPrice.getText()),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
+            updateInventoryPanel();
+            setActivePanel(inventoryPanel);
         }
         
     }
-    protected void repaintInventoryPanel(){
+    protected void updateInventoryPanel(){
         inventoryPanel.removeAll();
 
+        inventoryPanel.add(new JLabel(String.format("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
         
         Object [] inventory = store.inventory();
-
         for(int x = 0;x<inventory.length;x++){
             inventoryPanel.add(new JLabel(inventory[x].toString()));
         }
+
+        inventoryPanel.add(addItemButton);
+        inventoryPanel.add(returnButton,JPanel.BOTTOM_ALIGNMENT);
+
         
+        
+    }
+    
+    protected void onMenuClick(){
+
+        System.out.println("Menu Button Clicked");
+
+        setActivePanel(menuPanel);
+
+        Object [] inventory = store.inventory();
+        System.out.printf("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity");
+        for(int x = 0;x<inventory.length;x++){
+            System.out.println(inventory[x]);
+        }
+        
+    }
+    protected void onNewProductClick(){
+        Object [] itemTypes = {ItemType.CONSUMABLE,ItemType.MERCHANDISE};
+        Object [] possibleIngredients = store.inventory();
+
+        JTextField itemName = new JTextField();
+        JTextField itemPrice = new JTextField();
+        JTextField numberInStock = new JTextField();
+
+        JComboBox<ItemType> itemType = new JComboBox(itemTypes);
+        
+
+        Object [] infoNeeded = {"Item Name",itemName,"Item Price",itemPrice,"Item Type",itemType,"Number in Stock", numberInStock};
+        
+        int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Item", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(button == JOptionPane.OK_OPTION){
+            store.add(new Item(itemName.getText(),Integer.parseInt(itemPrice.getText()),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
+            updateInventoryPanel();
+            setActivePanel(inventoryPanel);
+        }
     }
 }
