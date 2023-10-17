@@ -12,7 +12,7 @@ public class TerminalWindow extends JFrame{
     
     private Store store;
     private JLabel display;
-    private File fileName = new File("TestFile.txt");
+    private File fileName = new File("Icy Delights\\src\\gui\\recources\\SavedInfo.txt");
 
     private JPanel activePanel;
     private JPanel bootPanel;
@@ -20,13 +20,13 @@ public class TerminalWindow extends JFrame{
     private JPanel customerPanel;
     private JPanel inventoryPanel;
     private JPanel menuPanel;
-    private JPanel productPanel;
 
     private JButton returnButton;
     private JButton addItemButton;
+    private JButton addProductButton;
 
     private Toolkit tk = Toolkit.getDefaultToolkit();
-    private Image logo = tk.getImage("Test/src/gui/recources/logo.png");
+    private Image logo = tk.getImage("Icy Delights\\src\\gui\\recources\\logo.png");
     
     public TerminalWindow(String name){
 
@@ -43,6 +43,7 @@ public class TerminalWindow extends JFrame{
         JButton customerInfoButton = new JButton("Customer Info");
         JButton inventoryButton    = new JButton("Inventory");
         JButton logoutButton       = new JButton("Logout");
+        JButton menuButton         = new JButton("Menu");
         JButton pastOrdersButton   = new JButton("Past Orders");
         JButton saveButton         = new JButton("Save");
         JButton loadButton         = new JButton("Load");
@@ -51,6 +52,7 @@ public class TerminalWindow extends JFrame{
         customerInfoButton.addActionListener(event -> onCustomerInfoClick());
         inventoryButton   .addActionListener(event -> onInventoryClick());
         logoutButton      .addActionListener(event -> onLogoutClick());
+        menuButton        .addActionListener(event -> onMenuClick());
         pastOrdersButton  .addActionListener(event -> onPastOrdersClick());
         saveButton        .addActionListener(event -> onSaveClick());
         loadButton        .addActionListener(event -> onLoadClick());
@@ -59,6 +61,7 @@ public class TerminalWindow extends JFrame{
         toolbar   .add(customerInfoButton);
         toolbar   .add(inventoryButton);
         toolbar   .add(logoutButton);
+        toolbar   .add(menuButton);
         toolbar   .add(pastOrdersButton);
         toolbar   .add(saveButton);
         toolbar   .add(loadButton);
@@ -122,18 +125,18 @@ public class TerminalWindow extends JFrame{
         // Product Panel /////////////////////////////////////////////////////////////////////////////////// 
 
         // Setup Panel
-        // productPanel = new JPanel ();
-        // productPanel.setLayout(new BoxLayout(productPanel, BoxLayout.Y_AXIS));
+        menuPanel = new JPanel();
+        menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
 
         // Create Fields
-        
-        
+        addProductButton = new JButton("Add Product");
         
         // Add Listeners
-        
+        addProductButton.addActionListener(event -> onNewProductClick());
 
         // Add Buttons
-
+        menuPanel.add(addProductButton);
+        menuPanel.add(returnButton,JPanel.BOTTOM_ALIGNMENT);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Set up JFrame /////////////////////////////////////////////////////////////////////////////////// 
 
@@ -203,7 +206,7 @@ public class TerminalWindow extends JFrame{
     protected void onInventoryClick(){
         
         System.out.println("Inventory Button Clicked");
-        inventoryPanel = new JPanel();
+
         updateInventoryPanel();
 
         setActivePanel(inventoryPanel);
@@ -232,7 +235,7 @@ public class TerminalWindow extends JFrame{
 
         System.out.println("Products Button Clicked");
 
-        setActivePanel(productPanel);
+        setActivePanel(menuPanel);
     }
 
     protected void onNewItemClick(){
@@ -271,18 +274,27 @@ public class TerminalWindow extends JFrame{
         
         
     }
-    
+    protected void updateMenuPanel(){
+        menuPanel.removeAll();
+
+        // menuPanel.add(new JLabel(String.format("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
+        
+        Object [] inventory = store.inventory();
+        for(int x = 0;x<inventory.length;x++){
+            inventoryPanel.add(new JLabel(inventory[x].toString()));
+        }
+
+        menuPanel.add(addProductButton);
+        menuPanel.add(returnButton,JPanel.BOTTOM_ALIGNMENT);
+
+        
+        
+    }
     protected void onMenuClick(){
 
         System.out.println("Menu Button Clicked");
 
         setActivePanel(menuPanel);
-
-        Object [] inventory = store.inventory();
-        System.out.printf("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity");
-        for(int x = 0;x<inventory.length;x++){
-            System.out.println(inventory[x]);
-        }
         
     }
     protected void onNewProductClick(){
