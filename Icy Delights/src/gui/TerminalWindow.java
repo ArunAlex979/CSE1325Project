@@ -11,7 +11,6 @@ import java.io.*;
 public class TerminalWindow extends JFrame{
     
     private Store store;
-    private JLabel display;
     private File fileName = new File("Icy Delights\\src\\gui\\recources\\SavedInfo.txt");
 
     private JPanel activePanel;
