@@ -158,11 +158,13 @@ public class TerminalWindow extends JFrame{
     protected void onSaveClick(){
         System.out.println("Save Button Clicked");
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("fileName"));
             store.save(bw);
             bw.close();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Unable to can " + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
+            System.out.println(fileName.toPath());
+            JOptionPane.showMessageDialog(this,"Im going to kms " + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
+            
         }
         
     }
@@ -175,7 +177,7 @@ public class TerminalWindow extends JFrame{
             store.load(br);
             br.close();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Unable to can " + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Unable to can PLEASE PLEASE PLEASE" + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
         }
         
     }
