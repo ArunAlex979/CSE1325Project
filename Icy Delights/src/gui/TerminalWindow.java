@@ -25,7 +25,7 @@ public class TerminalWindow extends JFrame{
     private JButton addProductButton;
 
     private Toolkit tk = Toolkit.getDefaultToolkit();
-    private Image logo = tk.getImage("Icy Delights\\src\\gui\\recources\\logo.png");
+    private Image logo = tk.getImage("Icy Delights\\src\\gui\\recources\\logoICY.png");
     
     public TerminalWindow(String name){
 
@@ -93,12 +93,15 @@ public class TerminalWindow extends JFrame{
 
         // Create Fields
         JButton iceCreamButton    = new JButton("Ice Cream");
+        //JButton vanilla       = new JButton("Vanilla");
 
         // Add Listeners
         iceCreamButton   .addActionListener(event -> onLogoutClick());
+        //vanilla   .addActionListener(event -> onLogoutClick());
 
         // Add Buttons
         customerPanel.add(iceCreamButton);
+        //customerPanel.add(vanilla);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Inventory Panel /////////////////////////////////////////////////////////////////////////////////
