@@ -133,7 +133,7 @@ public BackgroundImageJFrame()  {
     shopNow.setBounds(650,225,150,30); 
 	
 
-	JButton logo=new JButton(new ImageIcon("gui\\recources\\logo.png")); 
+	JButton logo=new JButton(new ImageIcon("ICY\\gui\\recources\\logo.png")); 
 	logo.setBackground(colors[4]);
 	logo.setBounds(225,0,930, 220); // 225,225,1000, 400 was in the middle of teh frame
 
@@ -147,11 +147,11 @@ public BackgroundImageJFrame()  {
 
 	Got the icons( menuBar & menuShoppingcart ) form those wesite 
 	 */
-	JButton menuBar=new JButton(new ImageIcon("gui\\recources\\menu-bar-1-64.png")); 
+	JButton menuBar=new JButton(new ImageIcon("ICY\\gui\\recources\\menu-bar-1-64.png")); 
 	menuBar.setBackground(colors[4]);
 	menuBar.setBounds(1400,10,50,40); 
 	
-	JButton menuShoppingcart=new JButton(new ImageIcon("gui\\recources\\menu-bar-shopping-cart-64.png")); 
+	JButton menuShoppingcart=new JButton(new ImageIcon("ICY\\gui\\recources\\menu-bar-shopping-cart-64.png")); 
 	menuShoppingcart.setBackground(colors[4]);
 	menuShoppingcart.setBounds(0,10,60,55); 
 
