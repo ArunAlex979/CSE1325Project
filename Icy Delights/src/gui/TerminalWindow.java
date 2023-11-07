@@ -2,11 +2,14 @@ package gui;
 
 import store.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 
 import java.io.*;
+
+import javax.imageio.ImageIO;
 
 public class TerminalWindow extends JFrame{
     
@@ -71,7 +74,12 @@ public class TerminalWindow extends JFrame{
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Boot Panel //////////////////////////////////////////////////////////////////////////////////////
 
-        bootPanel = new JPanel();
+
+       bootPanel = new JPanel();
+
+        bootPanel.setBackground(Color.ORANGE);
+
+
 
         // Create Fields
         JButton adminButton    = new JButton("Admin");
