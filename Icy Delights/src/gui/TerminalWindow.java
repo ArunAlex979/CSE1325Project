@@ -6,8 +6,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
+import javax.swing.*;  
+import java.awt.*;  
 
 import javax.imageio.ImageIO;
 
@@ -21,6 +24,7 @@ public class TerminalWindow extends JFrame{
     private JPanel adminPanel;
     private JPanel customerPanel;
     private JPanel inventoryPanel;
+    private JPanel finishPanel;
     private JPanel menuPanel;
 
     private JButton returnButton;
@@ -32,14 +36,25 @@ public class TerminalWindow extends JFrame{
     
     public TerminalWindow(String name){
 
+
+
+        /* 
+	This is the background color for the frame that is used
+	in the main window.
+	Found the RGB numbers using "Windows Paint" color picker tool to color match
+	Changed the background of the buttom to match the background of the frame. 
+	*/
+	Color colors[] = new Color[5];
+	colors[4] = new Color(238,238,238);
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Admin Panel /////////////////////////////////////////////////////////////////////////////////////
 
         adminPanel = new JPanel();
 
         JToolBar toolbar = new JToolBar("Icy Delights Toolbar");
-        toolbar.setOrientation(1);
-        toolbar.add(Box.createVerticalGlue());
+       // toolbar.setOrientation(1);
+      //  toolbar.add(Box.createVerticalGlue());
         
         // Create Fields
         JButton customerInfoButton = new JButton("Customer Info");
@@ -58,6 +73,7 @@ public class TerminalWindow extends JFrame{
         pastOrdersButton  .addActionListener(event -> onPastOrdersClick());
         saveButton        .addActionListener(event -> onSaveClick());
         loadButton        .addActionListener(event -> onLoadClick());
+      
 
         // Add Buttons
         toolbar   .add(customerInfoButton);
@@ -67,6 +83,7 @@ public class TerminalWindow extends JFrame{
         toolbar   .add(pastOrdersButton);
         toolbar   .add(saveButton);
         toolbar   .add(loadButton);
+        
         adminPanel.add(toolbar, BorderLayout.PAGE_START);
         
 
@@ -74,42 +91,149 @@ public class TerminalWindow extends JFrame{
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Boot Panel //////////////////////////////////////////////////////////////////////////////////////
 
+// We are using BorderLayout for the boot panael 
+       bootPanel = new JPanel(new BorderLayout(100,100));
 
-       bootPanel = new JPanel();
-
-        bootPanel.setBackground(Color.ORANGE);
+        //bootPanel.setBackground(Color.gray);
 
 
 
         // Create Fields
-        JButton adminButton    = new JButton("Admin");
-        JButton customerButton = new JButton("Customer");
-        
+        JButton logoBootPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logo.png")); 
+
+       // JButton adminButton    = new JButton("Admin");
+        JButton adminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+
+        JButton customerButton = new JButton("ORDER NOW!");
+        // Color Change for the buttons
+        adminButton.setBackground(colors[4]);
+        customerButton.setBackground(colors[4]);
+        logoBootPanel.setBackground(colors[4]);
         // Add Listeners
         adminButton   .addActionListener(event -> onAdminClick());
         customerButton.addActionListener(event -> onCustomerClick());
 
         // Add Buttons
-        bootPanel.add(adminButton);
-        bootPanel.add(customerButton);
+        bootPanel.add(adminButton, BorderLayout.SOUTH);
+      
+        
+        bootPanel.add(logoBootPanel, BorderLayout.NORTH);
+
+        bootPanel.add(customerButton, BorderLayout.CENTER);
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Customer Panel //////////////////////////////////////////////////////////////////////////////////
  
         // Setup Panel
-        customerPanel  = new JPanel();
+        customerPanel = new JPanel();
+        Font myFont = new Font("Ink Free",Font.BOLD,30);
 
+        JTextField textfield;
+	
+       
+       //       customerPanel  = new JPanel(new BorderLayout(100,100));  
+ 
+      //  customerPanel.setLayout(new BoxLayout(customerPanel, BoxLayout.Y_AXIS));
+        
         // Create Fields
-        JButton iceCreamButton    = new JButton("Ice Cream");
-        //JButton vanilla       = new JButton("Vanilla");
+        textfield = new JTextField();
+		textfield.setBounds(50, 25, 300, 50);
+        textfield.setFont(myFont);
+         JButton logoCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
+        JButton logo2CustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
 
+         JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+       
+         JButton vanilla       = new JButton("Vanilla");
+         
+         JButton chocolate     = new JButton("Chocolate");
+          JButton strawberry    = new JButton("Strawberry");
+        JButton mint          = new JButton("Mint");
+        JButton cookieDough   = new JButton("Cookie Dough");
+        JButton rockyRoad     = new JButton("Rocky Road");
+        JButton mocha         = new JButton("Mocha");
+        JButton coffee        = new JButton("Coffee");
+        
+        JButton banana        = new JButton("Banana");
+        JButton peach         = new JButton("Peach");
+        JButton finish       = new JButton("Finish");
+       
+
+       // Changing the color of the button. 
+       
+       customerPanelAdminButton.setBackground(colors[4]);
+       logoCustomerPanel.setBackground(colors[4]);
+        logo2CustomerPanel.setBackground(colors[4]);
+        
         // Add Listeners
-        iceCreamButton   .addActionListener(event -> onLogoutClick());
-        //vanilla   .addActionListener(event -> onLogoutClick());
+        customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+
+    
+
 
         // Add Buttons
-        customerPanel.add(iceCreamButton);
-        //customerPanel.add(vanilla);
+    customerPanel.add(logoCustomerPanel);
+    customerPanel.add(logo2CustomerPanel);
+    customerPanel.add(customerPanelAdminButton);
+    customerPanel.add(vanilla);
+    customerPanel.add(chocolate);
+    customerPanel.add(strawberry);
+    customerPanel.add(mint);
+    customerPanel.add(cookieDough);
+    customerPanel.add(rockyRoad);
+     customerPanel.add(mocha);
+    customerPanel.add(coffee);
+    customerPanel.add(finish);
+    customerPanel.add(banana);
+     customerPanel.add(peach);
+    customerPanel.add(textfield);
+
+        // customerPanel.add(new JButton("Vanilla"));
+           
+        //  customerPanel.add(new JButton("Chocolate"));
+        //  customerPanel.add(new JButton("Mint"));
+         
+        // customerPanel.add(new JButton("Strawberry"));
+     
+        // customerPanel.add(new JButton("Cookie Dough"));
+        // customerPanel.add(new JButton("Rocky Road"));
+  
+        
+     vanilla   .addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
+    vanilla   .addActionListener(event -> addOnClick());
+     finish .addActionListener(event -> finishOnClick());
+        customerPanel.setLayout(new GridLayout(5, 3, 20, 30));    
+              //  customerPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));    
+
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+ // Finish Panel /////////////////////////////////////////////////////////////////////////////////
+    finishPanel = new JPanel();
+
+
+       JTextField textfieldFinishPanel;
+
+        textfieldFinishPanel = new JTextField();
+		textfieldFinishPanel.setBounds(50, 205, 300, 50);
+        textfieldFinishPanel.setFont(myFont);
+
+    JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logo.png")); 
+    JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+   
+    finishPanelAdminButton.setBackground(colors[4]);
+    logofinishPanel.setBackground(colors[4]);
+
+    finishPanel.add(logofinishPanel);
+    finishPanel.add(finishPanelAdminButton);
+    finishPanel.add(textfieldFinishPanel);
+    textfieldFinishPanel.setText("tetetetettet");
+    finishPanelAdminButton   .addActionListener(event -> onLogoutClick());
+
+  finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Inventory Panel /////////////////////////////////////////////////////////////////////////////////
@@ -141,6 +265,9 @@ public class TerminalWindow extends JFrame{
         // Create Fields
         addProductButton = new JButton("Add Product");
         
+        
+       
+        
         // Add Listeners
         addProductButton.addActionListener(event -> onNewProductClick());
 
@@ -155,7 +282,7 @@ public class TerminalWindow extends JFrame{
         setActivePanel(bootPanel);
         this.setName(name);
         this.setIconImage(logo);
-        this.setSize(800,400);
+        this.setSize(1500, 800); //1500, 800
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         
@@ -235,6 +362,21 @@ public class TerminalWindow extends JFrame{
         System.out.println("Logout Button Clicked");
 
         setActivePanel(bootPanel);
+
+    }
+   
+      protected void addOnClick(){
+        
+        System.out.println("add Button Clicked");
+        
+        
+
+    }
+    protected void finishOnClick(){
+        
+        System.out.println("finish Button Clicked");
+        setActivePanel(finishPanel);
+        
 
     }
     protected void onCustomerClick(){
