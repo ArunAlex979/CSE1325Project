@@ -2,17 +2,12 @@ package gui;
 
 import store.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
-import javax.swing.*;  
-import java.awt.*;  
 
-import javax.imageio.ImageIO;
+import java.io.*;
+
 
 public class TerminalWindow extends JFrame{
     
@@ -128,11 +123,12 @@ public class TerminalWindow extends JFrame{
         // Setup Panel
         customerPanel = new JPanel();
         Font myFont = new Font("Ink Free",Font.BOLD,30);
+  
 
         JTextField textfield;
 	
        
-       //       customerPanel  = new JPanel(new BorderLayout(100,100));  
+       //    customerPanel  = new JPanel(new BorderLayout(100,100));  
  
       //  customerPanel.setLayout(new BoxLayout(customerPanel, BoxLayout.Y_AXIS));
         
@@ -140,15 +136,12 @@ public class TerminalWindow extends JFrame{
         textfield = new JTextField();
 		textfield.setBounds(50, 25, 300, 50);
         textfield.setFont(myFont);
-         JButton logoCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
+        JButton logoCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton logo2CustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
-
-         JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-       
-         JButton vanilla       = new JButton("Vanilla");
-         
-         JButton chocolate     = new JButton("Chocolate");
-          JButton strawberry    = new JButton("Strawberry");
+        JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+        JButton vanilla       = new JButton("Vanilla");
+        JButton chocolate     = new JButton("Chocolate");
+        JButton strawberry    = new JButton("Strawberry");
         JButton mint          = new JButton("Mint");
         JButton cookieDough   = new JButton("Cookie Dough");
         JButton rockyRoad     = new JButton("Rocky Road");
@@ -162,14 +155,12 @@ public class TerminalWindow extends JFrame{
 
        // Changing the color of the button. 
        
-       customerPanelAdminButton.setBackground(colors[4]);
-       logoCustomerPanel.setBackground(colors[4]);
-        logo2CustomerPanel.setBackground(colors[4]);
+    customerPanelAdminButton.setBackground(colors[4]);
+    logoCustomerPanel.setBackground(colors[4]);
+    logo2CustomerPanel.setBackground(colors[4]);
         
         // Add Listeners
         customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
-
-    
 
 
         // Add Buttons
@@ -189,22 +180,14 @@ public class TerminalWindow extends JFrame{
      customerPanel.add(peach);
     customerPanel.add(textfield);
 
-        // customerPanel.add(new JButton("Vanilla"));
-           
-        //  customerPanel.add(new JButton("Chocolate"));
-        //  customerPanel.add(new JButton("Mint"));
-         
-        // customerPanel.add(new JButton("Strawberry"));
-     
-        // customerPanel.add(new JButton("Cookie Dough"));
-        // customerPanel.add(new JButton("Rocky Road"));
+
   
         
-     vanilla   .addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
+    vanilla   .addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
     vanilla   .addActionListener(event -> addOnClick());
-     finish .addActionListener(event -> finishOnClick());
-        customerPanel.setLayout(new GridLayout(5, 3, 20, 30));    
-              //  customerPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));    
+    finish .addActionListener(event -> finishOnClick());
+    customerPanel.setLayout(new GridLayout(5, 3, 20, 30));    
+    //  customerPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));    
 
 
 
@@ -214,23 +197,51 @@ public class TerminalWindow extends JFrame{
     finishPanel = new JPanel();
 
 
-       JTextField textfieldFinishPanel;
+    JTextField totalFinishPanel;
+    JTextField  nameFinishPanel;
+    JTextField  phoneNumberFinishPanel;
+    JTextField  emailFinishPanel;
 
-        textfieldFinishPanel = new JTextField();
-		textfieldFinishPanel.setBounds(50, 205, 300, 50);
-        textfieldFinishPanel.setFont(myFont);
+        totalFinishPanel = new JTextField();
+        nameFinishPanel = new JTextField();
+        phoneNumberFinishPanel = new JTextField();
+        emailFinishPanel = new JTextField();
+        totalFinishPanel.setFont(myFont);
 
     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logo.png")); 
     JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-   
+   JButton nameLogo       = new JButton("Enter Your Name Here -->");
+   JButton phoneLogo       = new JButton("Enter Your Phone Number Here -->");
+   JButton emailLogo       = new JButton("Enter Your Email Here -->");
+   JButton totalLogo       = new JButton("Your Total -->");
+    nameLogo.setFont(myFont);
+    phoneLogo.setFont(myFont);
+    emailLogo.setFont(myFont);
+    totalLogo.setFont(myFont);
+    // color 
     finishPanelAdminButton.setBackground(colors[4]);
     logofinishPanel.setBackground(colors[4]);
+    nameLogo.setBackground(colors[4]);
+    phoneLogo.setBackground(colors[4]);
+    emailLogo.setBackground(colors[4]);
+    totalLogo.setBackground(colors[4]);
+
+   
 
     finishPanel.add(logofinishPanel);
     finishPanel.add(finishPanelAdminButton);
-    finishPanel.add(textfieldFinishPanel);
-    textfieldFinishPanel.setText("tetetetettet");
+    finishPanel.add(nameLogo);
+    finishPanel.add(nameFinishPanel);
+    finishPanel.add(phoneLogo);
+    finishPanel.add(phoneNumberFinishPanel);
+    finishPanel.add(emailLogo); 
+    finishPanel.add(emailFinishPanel); 
+    finishPanel.add(totalLogo);
+    finishPanel.add(totalFinishPanel);
+    
+  
     finishPanelAdminButton   .addActionListener(event -> onLogoutClick());
+   
 
   finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
 
@@ -368,6 +379,7 @@ public class TerminalWindow extends JFrame{
       protected void addOnClick(){
         
         System.out.println("add Button Clicked");
+       
         
         
 
