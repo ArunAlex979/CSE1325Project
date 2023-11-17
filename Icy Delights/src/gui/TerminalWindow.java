@@ -208,19 +208,34 @@ public class TerminalWindow extends JFrame{
         emailFinishPanel = new JTextField();
         totalFinishPanel.setFont(myFont);
 
-    JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logo.png")); 
+    JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
+        JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
+
     JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
    JButton nameLogo       = new JButton("Enter Your Name Here -->");
    JButton phoneLogo       = new JButton("Enter Your Phone Number Here -->");
    JButton emailLogo       = new JButton("Enter Your Email Here -->");
    JButton totalLogo       = new JButton("Your Total -->");
+      
+   JButton submitTotalLogo       = new JButton("Place Order");
+   JButton submitNameLogo       = new JButton("Submit");
+   JButton submitPhoneLogo       = new JButton("Submit");
+   JButton submitEmailLogo       = new JButton("Submit");
+
     nameLogo.setFont(myFont);
     phoneLogo.setFont(myFont);
     emailLogo.setFont(myFont);
     totalLogo.setFont(myFont);
+
+    submitTotalLogo.setFont(myFont);
+    submitNameLogo.setFont(myFont);
+    submitPhoneLogo.setFont(myFont);
+    submitEmailLogo.setFont(myFont);
+
     // color 
     finishPanelAdminButton.setBackground(colors[4]);
     logofinishPanel.setBackground(colors[4]);
+    logo2finishPanel.setBackground(colors[4]);
     nameLogo.setBackground(colors[4]);
     phoneLogo.setBackground(colors[4]);
     emailLogo.setBackground(colors[4]);
@@ -229,15 +244,25 @@ public class TerminalWindow extends JFrame{
    
 
     finishPanel.add(logofinishPanel);
+    finishPanel.add(logo2finishPanel);
     finishPanel.add(finishPanelAdminButton);
+
     finishPanel.add(nameLogo);
     finishPanel.add(nameFinishPanel);
+    finishPanel.add(submitNameLogo);
+
     finishPanel.add(phoneLogo);
     finishPanel.add(phoneNumberFinishPanel);
+    finishPanel.add(submitPhoneLogo);
+
     finishPanel.add(emailLogo); 
     finishPanel.add(emailFinishPanel); 
+    finishPanel.add(submitEmailLogo);
+
     finishPanel.add(totalLogo);
     finishPanel.add(totalFinishPanel);
+    finishPanel.add(submitTotalLogo);
+
     
   
     finishPanelAdminButton   .addActionListener(event -> onLogoutClick());
