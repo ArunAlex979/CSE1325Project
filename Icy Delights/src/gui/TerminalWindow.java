@@ -132,12 +132,13 @@ public class TerminalWindow extends JFrame{
       //  customerPanel.setLayout(new BoxLayout(customerPanel, BoxLayout.Y_AXIS));
         
         // Create Fields
-        textfield = new JTextField();
-        TextField text = new TextField(20);
-        text.setFont(smallFont);
+        TextField textRow1 = new TextField(20);
+        TextField textRow2 = new TextField(20);
+        TextField textRow3 = new TextField(20);
+        TextField textRow4 = new TextField(20);
+        textRow1.setFont(smallFont);
 
-		textfield.setBounds(50, 25, 300, 50);
-        textfield.setFont(myFont);
+	
         JButton logoCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton logo2CustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
@@ -149,6 +150,7 @@ public class TerminalWindow extends JFrame{
         JButton rockyRoad     = new JButton("Rocky Road");
         JButton mocha         = new JButton("Mocha");
         JButton coffee        = new JButton("Coffee");
+        JButton caramel       = new JButton("Caramel");
         
         JButton banana        = new JButton("Banana");
         JButton peach         = new JButton("Peach");
@@ -168,20 +170,30 @@ public class TerminalWindow extends JFrame{
         // Add Buttons
     customerPanel.add(logoCustomerPanel);
     customerPanel.add(logo2CustomerPanel);
+    customerPanel.add(textRow1);
+
     customerPanel.add(customerPanelAdminButton);
     customerPanel.add(vanilla);
     customerPanel.add(chocolate);
     customerPanel.add(strawberry);
+    customerPanel.add(textRow2);
+
     customerPanel.add(mint);
     customerPanel.add(cookieDough);
     customerPanel.add(rockyRoad);
+    customerPanel.add(textRow3);
+
     customerPanel.add(mocha);
+    customerPanel.add(caramel);
     customerPanel.add(coffee);
-    customerPanel.add(finish);
+    customerPanel.add(textRow4);
+
     customerPanel.add(banana);
     customerPanel.add(peach);
-    customerPanel.add(textfield);
-    customerPanel.add(text);
+    customerPanel.add(finish);
+
+    
+    
 
    // vanilla.addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
     vanilla.addActionListener(event -> addOnClick());
@@ -189,71 +201,78 @@ public class TerminalWindow extends JFrame{
     customerPanel.setLayout(new GridLayout(5, 5, 20, 30));
 
     // ActionListener for button click
-    ActionListener buttonClickListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            text.setText("Button Clicked");
-        }
-    };
+    
+    // ActionListener buttonClickListener = new ActionListener() {
+    //     @Override
+    //     public void actionPerformed(ActionEvent e) {
+    //         textRow1.setText("Button Clicked");
+    //     }
+    // };
 
      ActionListener vanillaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Vanilla Button Clicked");
+            textRow1.setText("Vanilla Button Clicked");
         }
     };
      ActionListener chocolateClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Chocolate Button Clicked");
+            textRow1.setText("Chocolate Button Clicked");
         }
     };
      ActionListener strawberryClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Strawberry Button Clicked");
+            textRow1.setText("Strawberry Button Clicked");
         }
     };
      ActionListener mintClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Mint Button Clicked");
+            textRow1.setText("Mint Button Clicked");
         }
     };
      ActionListener cookieDoughClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("CookieDough Button Clicked");
+            textRow1.setText("CookieDough Button Clicked");
         }
     };
      ActionListener rockyRoadClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("RockyRoad Button Clicked");
+            textRow1.setText("RockyRoad Button Clicked");
         }
     };
      ActionListener mochaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Mocha Button Clicked");
+            textRow1.setText("Mocha Button Clicked");
         }
     };
      ActionListener coffeeClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Coffee Button Clicked");
+            textRow1.setText("Coffee Button Clicked");
         }
     };
      ActionListener bananaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Banana Button Clicked");
+            textRow1.setText("Banana Button Clicked");
         }
     };
      ActionListener peachClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            text.setText("Peach Button Clicked");
+            textRow1.setText("Peach Button Clicked");
+        }
+    };
+      ActionListener caramelClickListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            textRow1.setText("Caramel Button Clicked");
         }
     };
    
@@ -270,7 +289,8 @@ public class TerminalWindow extends JFrame{
     coffee.addActionListener(coffeeClickListener);
     banana.addActionListener(bananaClickListener);
     peach.addActionListener(peachClickListener);
-    finish.addActionListener(buttonClickListener);
+    caramel.addActionListener(caramelClickListener);
+   // finish.addActionListener(caramelClickListener);
 
     // Finish Panel
     finishPanel = new JPanel();
