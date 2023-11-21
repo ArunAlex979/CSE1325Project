@@ -27,6 +27,9 @@ public class TerminalWindow  extends JFrame{
     private JPanel inventoryPanel;
     private JPanel finishPanel;
     private JPanel menuPanel;
+    private JPanel previousOrNewCustomerPanel;
+    private JPanel previousCustomerPanel;
+    private JPanel newCustomerPanel;
 
     private JButton returnButton;
     private JButton addItemButton;
@@ -106,6 +109,7 @@ public class TerminalWindow  extends JFrame{
         logoBootPanel.setBackground(colors[4]);
         // Add Listeners
         adminButton   .addActionListener(event -> onAdminClick());
+        //customerButton.addActionListener(event -> onCustomerClick());
         customerButton.addActionListener(event -> onCustomerClick());
 
         // Add Buttons
@@ -116,13 +120,87 @@ public class TerminalWindow  extends JFrame{
 
         bootPanel.add(customerButton, BorderLayout.CENTER);
 
+
+        Font myFont = new Font("Ink Free",Font.BOLD,30);
+        Font smallFont = new Font("Ink Free",Font.BOLD,20);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // New or Previous  Customer Panel /////////////////////////////////////////////////////////////////
+        previousOrNewCustomerPanel = new JPanel(new BorderLayout(100,100));
+        
+        // Create Fields
+
+        JButton logoPreviousOrNewCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logo.png")); 
+        JButton PreviousOrNewCustomerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+        JButton previousCustomerButton = new JButton("Previous Customer");
+        JButton newCustomerButton = new JButton("New Customer");
+        
+        // Color Change for the buttons
+        logoPreviousOrNewCustomerPanel.setBackground(colors[4]);
+        PreviousOrNewCustomerPanelAdminButton.setBackground(colors[4]);
+        previousCustomerButton.setBackground(colors[4]);
+        newCustomerButton.setBackground(colors[4]);
+        previousCustomerButton.setFont(myFont);
+        newCustomerButton.setFont(myFont);
+
+        // Add Buttons
+        previousOrNewCustomerPanel.add(PreviousOrNewCustomerPanelAdminButton, BorderLayout.SOUTH);
+        previousOrNewCustomerPanel.add(logoPreviousOrNewCustomerPanel, BorderLayout.NORTH);
+        previousOrNewCustomerPanel.add(previousCustomerButton, BorderLayout.WEST);
+        previousOrNewCustomerPanel.add(newCustomerButton, BorderLayout.CENTER);
+
+        PreviousOrNewCustomerPanelAdminButton   .addActionListener(event -> onAdminClick());
+        previousCustomerButton.addActionListener(event -> previousCustomerPanelClick());
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Previous Customer Panel /////////////////////////////////////////////////////////////////////////
+
+       // previousCustomerPanel = new JPanel(new BorderLayout(100,100));
+        previousCustomerPanel = new JPanel();
+        // Create Fields
+        TextField inputPhoneNumber = new TextField(20);
+
+        JButton logopreviousCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoD.png")); 
+        JButton previousCustomerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+        JButton previousCustomerPanelPhoneNumber = new JButton("Enter Your Phone Number");
+        JButton previousCustomerPanelSubmit = new JButton("Submit");
+
+        // Color Change for the buttons
+        logopreviousCustomerPanel.setBackground(colors[4]);
+        previousCustomerPanelAdminButton.setBackground(colors[4]);
+        previousCustomerPanelPhoneNumber.setBackground(colors[4]);
+        previousCustomerPanelSubmit.setBackground(colors[4]);
+        previousCustomerPanelPhoneNumber.setFont(myFont);
+        previousCustomerPanelSubmit.setFont(myFont);
+        inputPhoneNumber.setFont(myFont);
+        // Add Buttons
+        previousCustomerPanel.add(logopreviousCustomerPanel);
+        previousCustomerPanel.add(previousCustomerPanelPhoneNumber);
+        previousCustomerPanel.add(inputPhoneNumber);
+        previousCustomerPanel.add(previousCustomerPanelSubmit);
+        previousCustomerPanel.add(previousCustomerPanelAdminButton);
+
+        previousCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+        previousCustomerPanelSubmit.addActionListener(event -> orderonCustomerClick());
+        previousCustomerPanel.setLayout(new GridLayout(5, 0, 20, 30));
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        // New Customer Panel //////////////////////////////////////////////////////////////////////////////
+
+        newCustomerPanel = new JPanel();
+
+
+
+
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Customer Panel //////////////////////////////////////////////////////////////////////////////////
  
         // Setup Panel
         customerPanel = new JPanel();
-        Font myFont = new Font("Ink Free",Font.BOLD,30);
-        Font smallFont = new Font("Ink Free",Font.BOLD,20);
+        
 
         // Create Fields
         TextField textRow1 = new TextField(20);
@@ -522,7 +600,7 @@ try {
         setActivePanel(bootPanel);
         this.setName(name);
         this.setIconImage(logo);
-        this.setSize(800,400);
+        this.setSize(1500,800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         
@@ -604,6 +682,14 @@ try {
         }
 
     }
+protected void newCustomerClick(){
+        
+        System.out.println("New Customer Clicked");
+
+       
+
+    }
+
     protected void onLogoutClick(){
         
         System.out.println("Logout Button Clicked");
@@ -615,8 +701,24 @@ try {
 
         System.out.println("Customer Button Clicked");
 
-        setActivePanel(customerPanel);
+        //setActivePanel(customerPanel);
+        setActivePanel(previousOrNewCustomerPanel);
     }
+    protected void orderonCustomerClick(){
+
+        System.out.println(" Order Customer Button Clicked");
+
+        setActivePanel(customerPanel);
+        
+    }
+      protected void previousCustomerPanelClick(){
+
+        System.out.println("Previous Customer Panel Button Clicked");
+
+        setActivePanel(previousCustomerPanel);
+        
+    }
+    
     protected void onProductsClick(){
 
         System.out.println("Products Button Clicked");
