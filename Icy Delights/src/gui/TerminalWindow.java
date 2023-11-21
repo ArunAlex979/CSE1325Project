@@ -5,6 +5,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 
@@ -124,7 +130,7 @@ public class TerminalWindow extends JFrame{
         Font smallFont = new Font("Ink Free",Font.BOLD,20);
   
 
-        JTextField textfield;
+      
 	
        
        //    customerPanel  = new JPanel(new BorderLayout(100,100));  
@@ -142,18 +148,33 @@ public class TerminalWindow extends JFrame{
         JButton logoCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton logo2CustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-        JButton vanilla       = new JButton("Vanilla");
-        JButton chocolate     = new JButton("Chocolate");
-        JButton strawberry    = new JButton("Strawberry");
-        JButton mint          = new JButton("Mint");
-        JButton cookieDough   = new JButton("Cookie Dough");
-        JButton rockyRoad     = new JButton("Rocky Road");
-        JButton mocha         = new JButton("Mocha");
-        JButton coffee        = new JButton("Coffee");
-        JButton caramel       = new JButton("Caramel");
         
-        JButton banana        = new JButton("Banana");
-        JButton peach         = new JButton("Peach");
+        
+        String vanillaString = "Vanilla "; 
+        String chocolateString = "Chocolate ";
+        String strawberryString = "Strawberry ";
+        String mintString = "Mint ";
+        String cookieDoughString = "CookieDough ";
+        String rockyRoadString = "RockyRoad ";
+        String mochaString = "Mocha ";
+        String coffeeString = "Coffee ";
+        String bananaString = "Banana ";
+        String peachString = "Peach ";
+        String caramelString = "Caramel ";
+
+        
+        JButton vanilla       = new JButton(vanillaString);
+        JButton chocolate     = new JButton(chocolateString);
+        JButton strawberry    = new JButton(strawberryString);
+        JButton mint          = new JButton(mintString);
+        JButton cookieDough   = new JButton(cookieDoughString);
+        JButton rockyRoad     = new JButton(rockyRoadString);
+        JButton mocha         = new JButton(mochaString);
+        JButton coffee        = new JButton(coffeeString);
+        JButton caramel       = new JButton(caramelString);
+        
+        JButton banana        = new JButton(bananaString);
+        JButton peach         = new JButton(peachString);
         JButton finish       = new JButton("Finish");
        
 
@@ -162,9 +183,10 @@ public class TerminalWindow extends JFrame{
     customerPanelAdminButton.setBackground(colors[4]);
     logoCustomerPanel.setBackground(colors[4]);
     logo2CustomerPanel.setBackground(colors[4]);
+    finish.setBackground(Color.MAGENTA);
         
         // Add Listeners
-        customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+    customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
 
 
         // Add Buttons
@@ -193,35 +215,44 @@ public class TerminalWindow extends JFrame{
     customerPanel.add(finish);
 
     
-    
+  
 
    // vanilla.addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
-    vanilla.addActionListener(event -> addOnClick());
+   
     finish.addActionListener(event -> finishOnClick());
     customerPanel.setLayout(new GridLayout(5, 5, 20, 30));
 
-    // ActionListener for button click
-    
-    // ActionListener buttonClickListener = new ActionListener() {
-    //     @Override
-    //     public void actionPerformed(ActionEvent e) {
-    //         textRow1.setText("Button Clicked");
-    //     }
-    // };
+    // String firstString = "Hello";
+    // String secondString = "World";
+    // String combinedString = firstString.concat(secondString);
+    // System.out.println(combinedString);
 
-     ActionListener vanillaClickListener = new ActionListener() {
+
+
+
+    String combinedString = "";
+    String combinedStringPre = "";
+    ActionListener vanillaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Vanilla Button Clicked");
+             String combinedString = combinedStringPre.concat(vanillaString);
+             textRow1.setText(combinedString);
+             
         }
     };
-     ActionListener chocolateClickListener = new ActionListener() {
+   
+    ActionListener chocolateClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Chocolate Button Clicked");
+            String tempCombinedString = ""; 
+            tempCombinedString = tempCombinedString.concat(chocolateString);
+            textRow1.setText(tempCombinedString);
+           
         }
     };
-     ActionListener strawberryClickListener = new ActionListener() {
+
+    ActionListener strawberryClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Strawberry Button Clicked");
@@ -275,7 +306,6 @@ public class TerminalWindow extends JFrame{
             textRow1.setText("Caramel Button Clicked");
         }
     };
-   
 
 
     // Add ActionListener to buttons
@@ -290,7 +320,9 @@ public class TerminalWindow extends JFrame{
     banana.addActionListener(bananaClickListener);
     peach.addActionListener(peachClickListener);
     caramel.addActionListener(caramelClickListener);
-   // finish.addActionListener(caramelClickListener);
+   
+
+   
 
     // Finish Panel
     finishPanel = new JPanel();
@@ -308,7 +340,7 @@ public class TerminalWindow extends JFrame{
         totalFinishPanel.setFont(myFont);
 
     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
-        JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
+    JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
 
     JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
    JButton nameLogo       = new JButton("Enter Your Name Here -->");
@@ -320,7 +352,6 @@ public class TerminalWindow extends JFrame{
    JButton submitNameLogo       = new JButton("Submit");
    JButton submitPhoneLogo       = new JButton("Submit");
    JButton submitEmailLogo       = new JButton("Submit");
-
 
 
 
@@ -365,10 +396,98 @@ public class TerminalWindow extends JFrame{
     finishPanel.add(totalFinishPanel);
     finishPanel.add(submitTotalLogo);
 
+    // // save  customer name / phone Number / Email in a text file.  write 
+    // try {
+    //     BufferedWriter writer = new BufferedWriter(new FileWriter("customerOutput.txt"));
+    //     writer.write("text write ");
+    //     writer.write("\n here is another line text write ");
+    //     writer.close();
+    // } catch (IOException e1) {
+    //     // TODO Auto-generated catch block
+    //     e1.printStackTrace();
+    // } 
+// reader form the file 
+// try {
+//     BufferedReader reader  = new BufferedReader(new FileReader ("customerOutput.txt"));
+//     String line; 
+//     while ((line = reader.readLine()) != null) {
+//         System.out.println(line);
+//     }
+//    // System.out.println(   reader.readLine());
+//     reader.close(); 
+// } catch (IOException e1) {
+//     // TODO Auto-generated catch block
+//     e1.printStackTrace();
+// }
+
+
+ //final String[] customerName = {""};
+
+ 
+
+    ActionListener submitNameLogoClickListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+           // customerName[0] = nameFinishPanel.getText();
+            System.out.println("Name: " + nameFinishPanel.getText());
+
+
+try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("customerNameOutput.txt"));
+        writer.write(nameFinishPanel.getText() );
+        writer.close();
+    } catch (IOException e1) {
+        e1.printStackTrace();
+    } 
+        }
+    };
+
     
-  
-    finishPanelAdminButton   .addActionListener(event -> onLogoutClick());
-   
+
+    ActionListener submitPhoneLogoClickListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        System.out.println("Phone #: " + phoneNumberFinishPanel.getText());
+
+
+try {
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter("customerPhone#Output.txt"));
+       // writer2.write("\n");
+        writer2.write( phoneNumberFinishPanel.getText() );
+        writer2.close();
+    } catch (IOException e1) {
+        e1.printStackTrace();
+    } 
+        }
+    };
+    
+    ActionListener submitEmailLogoClickListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Email: " + emailFinishPanel.getText());
+
+
+try {
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("customerEmailOutput.txt"));
+        //writer3.write("\n");
+        writer3.write(emailFinishPanel.getText());
+        writer3.close();
+    } catch (IOException e1) {
+        e1.printStackTrace();
+    } 
+        }
+    };
+
+
+
+
+    submitNameLogo.addActionListener(submitNameLogoClickListener);
+    submitPhoneLogo.addActionListener(submitPhoneLogoClickListener);
+    submitEmailLogo.addActionListener(submitEmailLogoClickListener);
+
+    finishPanelAdminButton.addActionListener(event -> onLogoutClick());
+
 
   finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
 
