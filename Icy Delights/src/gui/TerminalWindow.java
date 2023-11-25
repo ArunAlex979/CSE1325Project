@@ -184,10 +184,31 @@ public class TerminalWindow  extends JFrame{
         previousCustomerPanel.add(previousCustomerPanelSubmit);
         previousCustomerPanel.add(previousCustomerPanelAdminButton);
 
+
+
         previousCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
         previousCustomerPanelSubmit.addActionListener(event -> orderonCustomerClick());
         previousCustomerPanel.setLayout(new GridLayout(5, 0, 20, 30));
       
+   ActionListener inputPhoneNumberClickListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+           // customerName[0] = nameFinishPanel.getText();
+            System.out.println("Phone Number: " + inputPhoneNumber.getText());
+
+
+try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(" previousCustomerPanelcustomerPhoneOutput.txt"));
+        writer.write(inputPhoneNumber.getText() );
+        writer.close();
+    } catch (IOException e1) {
+        e1.printStackTrace();
+    } 
+        }
+    };
+
+    previousCustomerPanelSubmit.addActionListener(inputPhoneNumberClickListener);
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -359,6 +380,7 @@ customerPanel.add(strawberryButton);
             //  textRow1.setText(combinedString);
             textRow1.setText("Vanilla Button Clicked");
              TESTClick("Vanilla ");
+    
 
 
         }
@@ -763,6 +785,7 @@ try {
 
         return 1;
     }
+
     private void setActivePanel(JPanel panel){
         this.remove(activePanel);
         this.activePanel = panel;
