@@ -3,11 +3,13 @@ package gui;
 import store.*;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument.Content;
 
 import java.awt.*;
 
 import java.io.*;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -151,6 +153,8 @@ public class TerminalWindow  extends JFrame{
 
         PreviousOrNewCustomerPanelAdminButton   .addActionListener(event -> onAdminClick());
         previousCustomerButton.addActionListener(event -> previousCustomerPanelClick());
+        newCustomerButton.addActionListener(event -> newCustomerClick());
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Previous Customer Panel /////////////////////////////////////////////////////////////////////////
@@ -183,26 +187,75 @@ public class TerminalWindow  extends JFrame{
         previousCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
         previousCustomerPanelSubmit.addActionListener(event -> orderonCustomerClick());
         previousCustomerPanel.setLayout(new GridLayout(5, 0, 20, 30));
-
+      
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // New Customer Panel //////////////////////////////////////////////////////////////////////////////
 
         newCustomerPanel = new JPanel();
+        JButton logonewCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoD.png")); 
+        JButton newCustomerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+        
+        JButton newCustomerPanelSubmit = new JButton("Submit");
 
+       
 
+        newCustomerPanel.add(logonewCustomerPanel);
+        newCustomerPanel.add(newCustomerPanelAdminButton);
+        newCustomerPanel.add(newCustomerPanelSubmit);
 
-
+         newCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+        //newCustomerPanel.add(new JLabel(String.format("%-7s %-15s %-4s %-15s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Customer Panel //////////////////////////////////////////////////////////////////////////////////
  
         // Setup Panel
         customerPanel = new JPanel();
+       /* 
+        JRadioButton vanillaButton; 
+        JRadioButton ChocolateButton; 
+        JRadioButton strawberryButton;
+
+        ImageIcon vanillaIcon;
+        
+        ImageIcon ChocolateIcon;
+        ImageIcon strawberryIcon;
+        
         
 
-        // Create Fields
+        customerPanel.setLayout(new FlowLayout());
+
+    // vanillaIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\vanilla.png");
+    // ChocolateIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\chocolate.png");
+    // strawberryIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\strawberry.png");
+    
+  //hotdogIcon = new ImageIcon("hotdog.png");
+  //String pizza = "pizza"; 
+  vanillaButton = new JRadioButton("Vanilla");
+  ChocolateButton = new JRadioButton("Chocolate");
+  strawberryButton = new JRadioButton("Strawberry");
+  ButtonGroup group = new ButtonGroup();
+    group.add(vanillaButton);
+    group.add(ChocolateButton);
+    group.add(strawberryButton);
+
+
+// vanillaButton.setIcon(vanillaIcon);
+// ChocolateButton.setIcon(ChocolateIcon);
+// strawberryButton.setIcon(strawberryIcon);
+
+
+vanillaButton.addActionListener(event -> TESTClick("Vanilla "));
+ChocolateButton.addActionListener(event -> TESTClick("Chocolate "));
+strawberryButton.addActionListener(event -> TESTClick("Strawberry "));
+
+customerPanel.add(vanillaButton);
+customerPanel.add(ChocolateButton);
+customerPanel.add(strawberryButton);
+*/
+       // Create Fields
         TextField textRow1 = new TextField(20);
         TextField textRow2 = new TextField(20);
         TextField textRow3 = new TextField(20);
@@ -259,7 +312,7 @@ public class TerminalWindow  extends JFrame{
     customerPanel.add(logo2CustomerPanel);
     customerPanel.add(textRow1);
 
-    customerPanel.add(customerPanelAdminButton);
+   customerPanel.add(customerPanelAdminButton);
     customerPanel.add(vanilla);
     customerPanel.add(chocolate);
     customerPanel.add(strawberry);
@@ -295,14 +348,19 @@ public class TerminalWindow  extends JFrame{
 
 
 
-    String combinedString = "";
-    String combinedStringPre = "";
+    // String combinedString = "";
+    // String combinedStringPre = "";
+
+
     ActionListener vanillaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-             String combinedString = combinedStringPre.concat(vanillaString);
-             textRow1.setText(combinedString);
-             
+            // //  String combinedString = combinedStringPre.concat(vanillaString);
+            //  textRow1.setText(combinedString);
+            textRow1.setText("Vanilla Button Clicked");
+             TESTClick("Vanilla ");
+
+
         }
     };
    
@@ -310,10 +368,10 @@ public class TerminalWindow  extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Chocolate Button Clicked");
-            String tempCombinedString = ""; 
-            tempCombinedString = tempCombinedString.concat(chocolateString);
-            textRow1.setText(tempCombinedString);
-           
+            // String tempCombinedString = ""; 
+            // tempCombinedString = tempCombinedString.concat(chocolateString);
+            // textRow1.setText(tempCombinedString);
+           TESTClick("Chocolate ");
         }
     };
 
@@ -321,54 +379,63 @@ public class TerminalWindow  extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Strawberry Button Clicked");
+             TESTClick("Strawberry ");
         }
     };
      ActionListener mintClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Mint Button Clicked");
+            TESTClick("Mint ");
         }
     };
      ActionListener cookieDoughClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("CookieDough Button Clicked");
+             TESTClick("CookieDough ");
         }
     };
      ActionListener rockyRoadClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("RockyRoad Button Clicked");
+            TESTClick("RockyRoad ");
         }
     };
      ActionListener mochaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Mocha Button Clicked");
+            TESTClick("Mocha ");
         }
     };
      ActionListener coffeeClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Coffee Button Clicked");
+            TESTClick("Coffee ");
         }
     };
      ActionListener bananaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Banana Button Clicked");
+            TESTClick("Banana ");
         }
     };
      ActionListener peachClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Peach Button Clicked");
+            TESTClick("Peach ");
         }
     };
       ActionListener caramelClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow1.setText("Caramel Button Clicked");
+            TESTClick("Caramel ");
         }
     };
 
@@ -387,9 +454,10 @@ public class TerminalWindow  extends JFrame{
     caramel.addActionListener(caramelClickListener);
    
 
-   
 
-    // Finish Panel
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Finish Panel ////////////////////////////////////////////////////////////////////////////////////
+    
     finishPanel = new JPanel();
     JTextField totalFinishPanel;
     JTextField  nameFinishPanel;
@@ -636,6 +704,65 @@ try {
         }
         
     }
+   int TESTClick(String IceName){
+       // System.out.println("TEST Button Clicked");
+       
+        System.out.println(IceName);
+        //setActivePanel(customerPanel);
+
+
+  try{
+	  FileWriter fstream = new FileWriter("order.txt",true);
+	  BufferedWriter out = new BufferedWriter(fstream);
+      //	  out.write("Line Added on: " + new java.util.Date()+"\n");
+
+	  out.write(IceName);
+	  out.close();
+  }catch (Exception e){
+	 System.err.println("Error while writing to file: " +
+          e.getMessage());
+  }
+  
+
+try {
+    BufferedReader reader  = new BufferedReader(new FileReader ("order.txt"));
+    String line; 
+    while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+
+        String inputString = line; 
+
+        // Split the input string into an array of names
+        String[] names = inputString.split(" ");
+        
+        // Create a HashMap to store the count of each name
+        Map<String, Integer> nameCount = new HashMap<>();
+        
+        // Count the occurrences of each name
+        for (String name : names) {
+            nameCount.put(name, nameCount.getOrDefault(name, 0) + 1);
+        }
+        
+        // Check if each name appears an odd or even number of times
+        for (String name : nameCount.keySet()) {
+            int count = nameCount.get(name);
+            
+            System.out.println(name + ": " + (count % 2 == 0 ? "false" : "true"));
+        }
+
+       
+        
+    }
+    //System.out.println( " sdsdsd" +  reader.readLine());
+    reader.close(); 
+} catch (IOException e1) {
+    // TODO Auto-generated catch block
+    e1.printStackTrace();
+}
+
+
+        return 1;
+    }
     private void setActivePanel(JPanel panel){
         this.remove(activePanel);
         this.activePanel = panel;
@@ -686,7 +813,8 @@ protected void newCustomerClick(){
         
         System.out.println("New Customer Clicked");
 
-       
+         setActivePanel(newCustomerPanel);
+
 
     }
 
@@ -711,12 +839,26 @@ protected void newCustomerClick(){
         setActivePanel(customerPanel);
         
     }
-      protected void previousCustomerPanelClick(){
+     protected void  previousCustomerPanelClick(){
 
         System.out.println("Previous Customer Panel Button Clicked");
 
-        setActivePanel(previousCustomerPanel);
-        
+         setActivePanel(previousCustomerPanel);
+
+    //     JTextField Name = new JTextField();
+    //     JTextField phoneNumber = new JTextField();
+    //     JTextField email = new JTextField();
+
+    //    // JComboBox<ItemType> itemType = new JComboBox(itemTypes);
+
+    //     Object [] infoNeeded = {"Name",Name,"Phone Number",phoneNumber,"Email", email};
+      
+    //     int button = JOptionPane.showConfirmDialog(this, infoNeeded, "PREVOIUS CUSTOMER INFO", JOptionPane.OK_CANCEL_OPTION);
+         
+    //     if(button == JOptionPane.OK_OPTION){
+    //         setActivePanel(customerPanel);
+    //     }
+
     }
     
     protected void onProductsClick(){
