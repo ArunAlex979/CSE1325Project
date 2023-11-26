@@ -762,9 +762,9 @@ try {
         
     }
 
-    public TerminalWindow(Store store){
-        this(store.name());
-    }
+    // public TerminalWindow(Store store){
+    //     this(store.name());
+    // }
 
     protected void onSaveClick(){
         System.out.println("Save Button Clicked");
