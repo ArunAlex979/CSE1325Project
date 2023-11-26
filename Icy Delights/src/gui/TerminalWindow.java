@@ -149,11 +149,14 @@ public class TerminalWindow  extends JFrame{
         previousOrNewCustomerPanel.add(PreviousOrNewCustomerPanelAdminButton, BorderLayout.SOUTH);
         previousOrNewCustomerPanel.add(logoPreviousOrNewCustomerPanel, BorderLayout.NORTH);
         previousOrNewCustomerPanel.add(previousCustomerButton, BorderLayout.WEST);
+
         previousOrNewCustomerPanel.add(newCustomerButton, BorderLayout.CENTER);
 
         PreviousOrNewCustomerPanelAdminButton   .addActionListener(event -> onAdminClick());
         previousCustomerButton.addActionListener(event -> previousCustomerPanelClick());
-        newCustomerButton.addActionListener(event -> newCustomerClick());
+        
+        //newCustomerButton.addActionListener(event -> newCustomerClick());
+        newCustomerButton.addActionListener(event -> orderonCustomerClick());
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
