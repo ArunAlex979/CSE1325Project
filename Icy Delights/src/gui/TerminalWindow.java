@@ -40,7 +40,7 @@ public class TerminalWindow  extends JFrame{
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Image logo = tk.getImage("Icy Delights\\src\\gui\\recources\\logoICY.png");
     
-    public TerminalWindow(String name){
+    public TerminalWindow(String name) throws IOException{
 
         /* 
 	This is the background color for the frame that is used
@@ -200,13 +200,66 @@ public class TerminalWindow  extends JFrame{
 
 try {
         BufferedWriter writer = new BufferedWriter(new FileWriter(" previousCustomerPanelcustomerPhoneOutput.txt"));
-        writer.write(inputPhoneNumber.getText() );
+        writer.write(inputPhoneNumber.getText()+"\n" );
+         
         writer.close();
     } catch (IOException e1) {
         e1.printStackTrace();
     } 
         }
     };
+
+      ActionListener searchPhoneNumberClickListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        
+            // searchPhoneNumber(inputPhoneNumber.getText());
+
+           String filePath = "rewardsHistory.txt";
+        
+        String phoneNumberToSearch = inputPhoneNumber.getText();
+        String  normalizePhoneNumber = phoneNumberToSearch.replaceAll("[\\s\\-\\(\\)]+", "");
+
+
+ try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 3 && parts[1].equals(normalizePhoneNumber)) {
+                    String name = parts[0];
+                    String phoneNumber = parts[1];
+                    int rewardPoints = Integer.parseInt(parts[2]);
+
+
+try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("orderCusINFO.txt"));
+        writer.write(name+","+phoneNumber+","+rewardPoints+"\n"  );
+        writer.close();
+    } catch (IOException e1) {
+        e1.printStackTrace();
+    } 
+                    System.out.println("Name: " + name);
+                    System.out.println("Phone Number: " + phoneNumber);
+                    System.out.println("Reward Points: " + rewardPoints);
+                    break;
+                }
+            }
+
+            // Close the file
+            reader.close();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
+            
+    
+            }
+    };
+
+    previousCustomerPanelSubmit.addActionListener(searchPhoneNumberClickListener);
+
+   // searchPhoneNumber(inputPhoneNumber.getText());
 
     previousCustomerPanelSubmit.addActionListener(inputPhoneNumberClickListener);
 
@@ -326,10 +379,23 @@ customerPanel.add(strawberryButton);
         
         // Add Listeners
     customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+    
 
 
-        // Add Buttons
-    customerPanel.add(logoCustomerPanel);
+// textRow1.setText("Vanilla Button Clicked");
+
+     
+// String filePath = "orderCusINFO.txt"; // Update with the actual file path
+//     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+//         while (reader.readLine() == null) {
+        
+//             System.out.println("Hello");
+        
+//         }
+//     }
+
+// Add Buttons
+        customerPanel.add(logoCustomerPanel);
     customerPanel.add(logo2CustomerPanel);
     customerPanel.add(textRow1);
 
@@ -785,6 +851,47 @@ try {
 
         return 1;
     }
+ 
+//     int searchPhoneNumber(String tempSearchPhoneNumber){
+
+//         System.out.println("Phone Number: " + tempSearchPhoneNumber);
+
+          
+       
+//         String filePath = "rewardsHistory.txt";
+        
+//         String phoneNumberToSearch = tempSearchPhoneNumber;
+
+//         try {
+
+//             BufferedReader reader = new BufferedReader(new FileReader(filePath));
+//             String line;
+//             while ((line = reader.readLine()) != null) {
+//                 String[] parts = line.split(" ");
+//                 if (parts.length >= 3 && parts[1].equals(phoneNumberToSearch)) {
+//                     String name = parts[0];
+//                     String phoneNumber = parts[1];
+//                     int rewardPoints = Integer.parseInt(parts[2]);
+
+//                     System.out.println("Name: " + name);
+//                     System.out.println("Phone Number: " + phoneNumber);
+//                     System.out.println("Reward Points: " + rewardPoints);
+//                     break;
+//                 }
+//             }
+
+//             // Close the file
+//             reader.close();
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
+           
+
+// return 1; 
+//     }
+
+
+
 
     private void setActivePanel(JPanel panel){
         this.remove(activePanel);
