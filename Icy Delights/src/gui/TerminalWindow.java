@@ -8,6 +8,8 @@ import javax.swing.text.AbstractDocument.Content;
 import java.awt.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +52,18 @@ public class TerminalWindow  extends JFrame{
 	*/
 	Color colors[] = new Color[5];
 	colors[4] = new Color(238,238,238);
+
+
+
+        // cleares all of the data off the files 
+    new FileWriter("total.txt", false).close();
+    new FileWriter("orderCusINFO.txt", false).close();
+    new FileWriter("order.txt", false).close();
+    new FileWriter(" previousCustomerPanelcustomerPhoneOutput.txt", false).close();
+    new FileWriter("currentOrderINFO.txt", false).close();
+
+
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Admin Panel /////////////////////////////////////////////////////////////////////////////////////
@@ -237,8 +251,11 @@ try {
 
 
 try {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("orderCusINFO.txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("currentOrderINFO.txt"));
         writer.write(name+","+phoneNumber+","+rewardPoints+"\n"  );
+         if (phoneNumber != phoneNumberToSearch){
+                        System.out.println("Phone Number not found");
+                    }
         writer.close();
     } catch (IOException e1) {
         e1.printStackTrace();
@@ -246,12 +263,19 @@ try {
                     System.out.println("Name: " + name);
                     System.out.println("Phone Number: " + phoneNumber);
                     System.out.println("Reward Points: " + rewardPoints);
+                   
+
                     break;
                 }
             }
 
             // Close the file
             reader.close();
+
+
+            
+
+
         } catch (IOException ei) {
             ei.printStackTrace();
         }
@@ -283,6 +307,8 @@ try {
         newCustomerPanel.add(newCustomerPanelSubmit);
 
          newCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+
+         
         //newCustomerPanel.add(new JLabel(String.format("%-7s %-15s %-4s %-15s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -290,6 +316,7 @@ try {
  
         // Setup Panel
         customerPanel = new JPanel();
+
        /* 
         JRadioButton vanillaButton; 
         JRadioButton ChocolateButton; 
@@ -338,11 +365,16 @@ customerPanel.add(strawberryButton);
         TextField textRow3 = new TextField(20);
         TextField textRow4 = new TextField(20);
         textRow1.setFont(smallFont);
+        textRow2.setFont(smallFont);
+        textRow3.setFont(smallFont);
+        textRow4.setFont(smallFont);
 
 	
         JButton logoCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton logo2CustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
         JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
+        JButton customerPanelBackButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\back.png"));
+
         
         
         String vanillaString = "Vanilla "; 
@@ -378,6 +410,7 @@ customerPanel.add(strawberryButton);
     customerPanelAdminButton.setBackground(colors[4]);
     logoCustomerPanel.setBackground(colors[4]);
     logo2CustomerPanel.setBackground(colors[4]);
+    customerPanelBackButton.setBackground(colors[4]);
     finish.setBackground(Color.MAGENTA);
         
         // Add Listeners
@@ -421,13 +454,16 @@ customerPanel.add(strawberryButton);
     customerPanel.add(banana);
     customerPanel.add(peach);
     customerPanel.add(finish);
-
+    customerPanel.add(customerPanelBackButton);
+    textRow1.setText("Welcome To Icy Delights ");
     
+ 
   
 
    // vanilla.addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
    
     finish.addActionListener(event -> finishOnClick());
+    customerPanelBackButton.addActionListener(event -> onCustomerClick());
     customerPanel.setLayout(new GridLayout(5, 5, 20, 30));
 
     // String firstString = "Hello";
@@ -447,9 +483,10 @@ customerPanel.add(strawberryButton);
         public void actionPerformed(ActionEvent e) {
             // //  String combinedString = combinedStringPre.concat(vanillaString);
             //  textRow1.setText(combinedString);
-            textRow1.setText("Vanilla Button Clicked");
+            textRow2.setText("Vanilla Added to Cart");
+            
              TESTClick("Vanilla ");
-    
+             //  vanilla.setBackground(colors[4]);
 
 
         }
@@ -458,7 +495,7 @@ customerPanel.add(strawberryButton);
     ActionListener chocolateClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Chocolate Button Clicked");
+            textRow2.setText("Chocolate Added to Cart");
             // String tempCombinedString = ""; 
             // tempCombinedString = tempCombinedString.concat(chocolateString);
             // textRow1.setText(tempCombinedString);
@@ -469,63 +506,63 @@ customerPanel.add(strawberryButton);
     ActionListener strawberryClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Strawberry Button Clicked");
+            textRow2.setText("Strawberry Added to Cart");
              TESTClick("Strawberry ");
         }
     };
      ActionListener mintClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Mint Button Clicked");
+            textRow3.setText("Mint Added to Cart");
             TESTClick("Mint ");
         }
     };
      ActionListener cookieDoughClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("CookieDough Button Clicked");
+            textRow3.setText("CookieDough Added to Cart");
              TESTClick("CookieDough ");
         }
     };
      ActionListener rockyRoadClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("RockyRoad Button Clicked");
+            textRow3.setText("RockyRoad Added to Cart");
             TESTClick("RockyRoad ");
         }
     };
      ActionListener mochaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Mocha Button Clicked");
+            textRow4.setText("Mocha Added to Cart");
             TESTClick("Mocha ");
         }
     };
      ActionListener coffeeClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Coffee Button Clicked");
+            textRow4.setText("Coffee Added to Cart");
             TESTClick("Coffee ");
         }
     };
      ActionListener bananaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Banana Button Clicked");
+            textRow4.setText("Banana Added to Cart");
             TESTClick("Banana ");
         }
     };
      ActionListener peachClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Peach Button Clicked");
+            textRow4.setText("Peach Added to Cart");
             TESTClick("Peach ");
         }
     };
       ActionListener caramelClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            textRow1.setText("Caramel Button Clicked");
+            textRow4.setText("Caramel Added to Cart");
             TESTClick("Caramel ");
         }
     };
@@ -777,7 +814,7 @@ try {
             bw.close();
         }catch(Exception e){
             System.out.println(fileName.toPath());
-            JOptionPane.showMessageDialog(this,"Im going to kms " + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Im going to" + fileName + 'n' + e,"Failed",JOptionPane.ERROR_MESSAGE);
             
         }
         
@@ -839,6 +876,31 @@ try {
             int count = nameCount.get(name);
             
             System.out.println(name + ": " + (count % 2 == 0 ? "false" : "true"));
+
+
+
+
+  try{
+	  FileWriter fstream = new FileWriter("total.txt",true);
+	  BufferedWriter out = new BufferedWriter(fstream);
+      //	  out.write("Line Added on: " + new java.util.Date()+"\n");
+    
+
+    out.write(name + ": " + (count % 2 == 0 ? "false" : "true"));
+    out.write("\n");
+
+	out.close();
+     
+  
+
+  }catch (Exception e){
+	 System.err.println("Error while writing to file: " +
+          e.getMessage());
+  }
+
+
+
+
         }
 
        
