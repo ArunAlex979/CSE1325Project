@@ -1167,7 +1167,7 @@ try {
                     }
         
                     if (lastLine != null) {
-                        System.out.println("Last line of the file: " + lastLine);
+                        System.out.println("Last line of the file : " + lastLine);
                     } else {
                         System.out.println("The file is empty.");
                     }
@@ -1190,6 +1190,7 @@ try {
     JTextField  nameFinishPanel;
     JTextField  phoneNumberFinishPanel;
     JTextField  emailFinishPanel;
+    JTextField  rewardPointsFinishPanel;
    
 
 
@@ -1197,6 +1198,8 @@ try {
         nameFinishPanel = new JTextField();
         phoneNumberFinishPanel = new JTextField();
         emailFinishPanel = new JTextField();
+        rewardPointsFinishPanel = new JTextField();
+        rewardPointsFinishPanel.setFont(myFont);
         totalFinishPanel.setFont(myFont);
 
     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
@@ -1221,6 +1224,9 @@ if (name != null){
    }
     if (lastLine != null){
     totalFinishPanel.setText("$"+lastLine);
+   }
+    if (rewardPoints != -1){
+    rewardPointsFinishPanel.setText("Your Reward Points: "+rewardPoints);
    }
  
 
@@ -1251,7 +1257,7 @@ if (name != null){
    
 
     finishPanel.add(logofinishPanel);
-    finishPanel.add(logo2finishPanel);
+    finishPanel.add(rewardPointsFinishPanel);
     finishPanel.add(finishPanelAdminButton);
 
     finishPanel.add(nameLogo);
