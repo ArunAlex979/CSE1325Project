@@ -72,7 +72,7 @@ public class TerminalWindow extends JFrame{
         JButton loadButton         = new JButton("Load");
 
         // Add Listeners
-        customerInfoButton.addActionListener(event -> onCustomerInfoClick());
+        customerInfoButton.addActionListener(event -> onNewCustomerClick());
         inventoryButton   .addActionListener(event -> onInventoryClick());
         logoutButton      .addActionListener(event -> onLogoutClick());
         menuButton        .addActionListener(event -> onMenuClick());
@@ -165,6 +165,7 @@ public class TerminalWindow extends JFrame{
 
         activePanel    = new JPanel();
         store = new Store(name);
+        onLoadClick();
         setActivePanel(bootPanel);
         this.setName(name);
         this.setIconImage(logo);
@@ -196,7 +197,6 @@ public class TerminalWindow extends JFrame{
         System.out.println("Load Button Clicked");
         try{
             BufferedReader br = new BufferedReader(new FileReader(fileName));
-            store.close();
             store.load(br);
             br.close();
         }catch(Exception e){
@@ -281,8 +281,30 @@ public class TerminalWindow extends JFrame{
             updateInventoryPanel();
             setActivePanel(inventoryPanel);
         }
-        
+        onSaveClick();
     }
+
+    protected void onNewCustomerClick(){
+
+        JTextField name = new JTextField();
+        JTextField phoneNumber = new JTextField();
+        JTextField email = new JTextField();
+
+        Object [] infoNeeded = {"Name",name,"Phone Number",phoneNumber,"Email Address", email};
+        
+        int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Customer", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(button == JOptionPane.OK_OPTION){
+            // String firstName, String lastName, String email, Short phoneNumber
+            String [] fullName = name.getText().split(" ");
+            store.add(new Customer(fullName[0],fullName[1],email.getText(),Long.parseLong(phoneNumber.getText())));;
+            updateInventoryPanel();
+            setActivePanel(inventoryPanel);
+        }
+        
+        onSaveClick();
+    }
+
     protected void updateInventoryPanel(){
         inventoryPanel.removeAll();
 
@@ -322,25 +344,5 @@ public class TerminalWindow extends JFrame{
         setActivePanel(menuPanel);
         
     }
-    // protected void onNewProductClick(){
-    //     Object [] itemTypes = {ItemType.CONSUMABLE,ItemType.MERCHANDISE};
-    //     Object [] possibleIngredients = store.inventory();
 
-    //     JTextField itemName = new JTextField();
-    //     JTextField itemPrice = new JTextField();
-    //     JTextField numberInStock = new JTextField();
-
-    //     JComboBox<ItemType> itemType = new JComboBox(itemTypes);
-        
-
-    //     Object [] infoNeeded = {"Item Name",itemName,"Item Price",itemPrice,"Item Type",itemType,"Number in Stock", numberInStock};
-        
-    //     int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Item", JOptionPane.OK_CANCEL_OPTION);
-        
-    //     if(button == JOptionPane.OK_OPTION){
-    //         store.add(new Item(itemName.getText(),Integer.parseInt(itemPrice.getText()),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
-    //         updateInventoryPanel();
-    //         setActivePanel(inventoryPanel);
-    //     }
-    // }
 }

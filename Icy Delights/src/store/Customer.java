@@ -9,7 +9,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
-    private short phoneNumber;
+    private long phoneNumber;
     public long rewardPoints;
     private ArrayList<Long> previousOrders = new ArrayList<Long>();
 
@@ -17,11 +17,20 @@ public class Customer {
         this.firstName = "Guest";
     }
 
-    public Customer(String firstName, String lastName, String email, Short phoneNumber){
+    public Customer(String firstName, String lastName, String email, long phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Customer(String br){
+        String [] infoNeeded = br.split(" ");
+        this.phoneNumber = Long.parseLong(infoNeeded[0]);
+        this.lastName = infoNeeded[1];
+        this.firstName = infoNeeded[2];
+        this.email = infoNeeded[3];
+        this.rewardPoints = Long.parseLong(infoNeeded[4]);
     }
 
      public void save(BufferedWriter bw) throws IOException {

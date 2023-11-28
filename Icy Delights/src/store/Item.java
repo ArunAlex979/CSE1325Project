@@ -15,10 +15,8 @@ public class Item {
 
     public Item(String label, ItemType itemType, long amountInStock){
         this.label = label;
-        
         this.itemType = itemType;
         this.amountInStock = amountInStock;
-
         this.binNumber = nextBinNumber++;
     }
 
@@ -29,18 +27,20 @@ public class Item {
 
         this.binNumber = nextBinNumber++;
     }
-    // public Item(BufferedReader br) throws IOException {
-    //     this.label = br.readLine();
-    //     this.price = Integer.parseInt(br.readLine());
-    //     // this.itemType = (ItemType) br.readLine();
-    //     this.amountInStock = Long.parseLong(br.readLine());
 
-    //     this.binNumber = Integer.parseInt(br.readLine());
-    // }
+    public Item(String br){
+        String [] infoNeeded = br.split(" ");
+        this.label = infoNeeded[0];
+        this.itemType = infoNeeded[1].equals("FLAVOR")?ItemType.FLAVOR:ItemType.TOPPING;
+        this.amountInStock = Long.parseLong(infoNeeded[2]);
+        this.binNumber = Integer.parseInt(infoNeeded[3]);
+
+        nextBinNumber = binNumber + 1;
+    }
 
     public void save(BufferedWriter bw) throws IOException {
         bw.write(label + ' ');
-        // bw.write(itemType + '\n');
+        bw.write(itemType.toString() + ' ');
         bw.write("" + Long.toString(amountInStock) + ' ');
 
         bw.write("" + Integer.toString(binNumber) + '\n');
