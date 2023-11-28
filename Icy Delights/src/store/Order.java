@@ -7,14 +7,14 @@ public class Order{
 
     private long orderNumber;
     private short customerNumber;
-    private ArrayList<Product> products = new ArrayList<Product>();
+    private ArrayList<Item> items = new ArrayList<Item>();
 
     public Order(){
         this.orderNumber = nextOrderNumber++;
     }
 
-    public void addProduct(Product product){
-        this.products.add(product);
+    public void addItem(Item item){
+        this.items.add(item);
         
     }
 
