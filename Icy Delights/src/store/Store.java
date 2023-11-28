@@ -75,6 +75,13 @@ public class Store {
         return name;
     }
 
+    public Customer findCustomer(long phoneNumber){
+        for(Customer customer:customers){
+            if(customer.phoneNumber()==phoneNumber)
+                return customer;
+        }
+        return new Customer();
+    }
 
     public void add(Customer customer){
         customers.add(customer);

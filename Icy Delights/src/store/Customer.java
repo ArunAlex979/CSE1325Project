@@ -33,6 +33,9 @@ public class Customer implements Comparable{
         this.rewardPoints = Long.parseLong(infoNeeded[4]);
     }
 
+    public long phoneNumber(){
+        return phoneNumber;
+    }
      public void save(BufferedWriter bw) throws IOException {
         bw.write(""+ phoneNumber + ' ');
         bw.write(lastName + ' ');
@@ -49,6 +52,15 @@ public class Customer implements Comparable{
     public void useReward(long rewardPoints){
         this.rewardPoints -= rewardPoints;
     }
+    public String firstName(){
+        return String.format("%s %s",firstName,lastName);
+    }
+    public String lastName(){
+        return String.format("%s %s",firstName,lastName);
+    }
+    public String fullName(){
+        return String.format("%s %s",firstName,lastName);
+    }
 
     @Override
     public String toString(){
@@ -59,6 +71,6 @@ public class Customer implements Comparable{
     }
     @Override
     public int compareTo(Object o){
-        return (int) (phoneNumber - (int) o);
+        return (int) ( (int) o - phoneNumber);
     }
 }
