@@ -75,7 +75,31 @@ public class TerminalWindow  extends JFrame{
         JToolBar toolbar = new JToolBar("Icy Delights Toolbar");
         toolbar.setOrientation(1);
         toolbar.add(Box.createVerticalGlue());
+
+        JMenuBar menubar = new JMenuBar();
         
+        JMenu     file       = new JMenu("File");
+        JMenuItem quit       = new JMenuItem("Quit");
+
+        JMenu     insert     = new JMenu("Insert");
+        JMenuItem iCustomer  = new JMenuItem("Customer");
+        JMenuItem iOption    = new JMenuItem("Option");
+        JMenuItem iComputer  = new JMenuItem("Computer");
+        
+        JMenu     view       = new JMenu("View");
+        JMenuItem vCustomer  = new JMenuItem("Customers");
+        JMenuItem vOption    = new JMenuItem("Options");
+        JMenuItem vComputer  = new JMenuItem("Computers");
+        
+        JMenu     help       = new JMenu("Help");
+        JMenuItem about      = new JMenuItem("About");
+        
+        menubar.add(file);
+        menubar.add(insert);
+        menubar.add(view);
+        menubar.add(help);
+        
+        setJMenuBar(menubar);
         // Create Fields
         JButton customerInfoButton = new JButton("Customer Info");
         JButton inventoryButton    = new JButton("Inventory");
@@ -86,7 +110,7 @@ public class TerminalWindow  extends JFrame{
         JButton loadButton         = new JButton("Load");
 
         // Add Listeners
-        customerInfoButton.addActionListener(event -> onCustomerInfoClick());
+        customerInfoButton.addActionListener(event -> onNewCustomerClick());
         inventoryButton   .addActionListener(event -> onInventoryClick());
         logoutButton      .addActionListener(event -> onLogoutClick());
         menuButton        .addActionListener(event -> onMenuClick());
@@ -807,7 +831,7 @@ customerPanel.add(strawberryButton);
         addProductButton = new JButton("Add Product");
         
         // Add Listeners
-        addProductButton.addActionListener(event -> onNewProductClick());
+        // addProductButton.addActionListener(event -> onNewProductClick());
 
         // Add Buttons
         menuPanel.add(addProductButton);
@@ -817,6 +841,7 @@ customerPanel.add(strawberryButton);
 
         activePanel    = new JPanel();
         store = new Store(name);
+        onLoadClick();
         setActivePanel(bootPanel);
         this.setName(name);
         this.setIconImage(logo);
@@ -833,7 +858,7 @@ customerPanel.add(strawberryButton);
     protected void onSaveClick(){
         System.out.println("Save Button Clicked");
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter("fileName"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             store.save(bw);
             bw.close();
         }catch(Exception e){
@@ -848,7 +873,6 @@ customerPanel.add(strawberryButton);
         System.out.println("Load Button Clicked");
         try{
             BufferedReader br = new BufferedReader(new FileReader(fileName));
-            store.close();
             store.load(br);
             br.close();
         }catch(Exception e){
@@ -1442,7 +1466,7 @@ protected void newCustomerClick(){
     }
 
     protected void onNewItemClick(){
-        Object [] itemTypes = {ItemType.CONSUMABLE,ItemType.SUPPLIES,ItemType.MERCHANDISE};
+        Object [] itemTypes = {ItemType.FLAVOR,ItemType.TOPPING};
 
         JTextField itemName = new JTextField();
         JTextField itemPrice = new JTextField();
@@ -1450,17 +1474,39 @@ protected void newCustomerClick(){
 
         JComboBox<ItemType> itemType = new JComboBox(itemTypes);
 
-        Object [] infoNeeded = {"Item Name",itemName,"Item Price",itemPrice,"Item Type",itemType,"Number in Stock", numberInStock};
+        Object [] infoNeeded = {"Item Name",itemName,"Item Type",itemType,"Number in Stock", numberInStock};
         
         int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Item", JOptionPane.OK_CANCEL_OPTION);
         
         if(button == JOptionPane.OK_OPTION){
-            store.add(new Item(itemName.getText(),Integer.parseInt(itemPrice.getText()),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
+            store.add(new Item(itemName.getText(),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
+            updateInventoryPanel();
+            setActivePanel(inventoryPanel);
+        }
+        onSaveClick();
+    }
+
+    protected void onNewCustomerClick(){
+
+        JTextField name = new JTextField();
+        JTextField phoneNumber = new JTextField();
+        JTextField email = new JTextField();
+
+        Object [] infoNeeded = {"Name",name,"Phone Number",phoneNumber,"Email Address", email};
+        
+        int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Customer", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(button == JOptionPane.OK_OPTION){
+            // String firstName, String lastName, String email, Short phoneNumber
+            String [] fullName = name.getText().split(" ");
+            store.add(new Customer(fullName[0],fullName[1],email.getText(),Long.parseLong(phoneNumber.getText())));;
             updateInventoryPanel();
             setActivePanel(inventoryPanel);
         }
         
+        onSaveClick();
     }
+
     protected void updateInventoryPanel(){
         inventoryPanel.removeAll();
 
@@ -1500,25 +1546,5 @@ protected void newCustomerClick(){
         setActivePanel(menuPanel);
         
     }
-    protected void onNewProductClick(){
-        Object [] itemTypes = {ItemType.CONSUMABLE,ItemType.MERCHANDISE};
-        Object [] possibleIngredients = store.inventory();
 
-        JTextField itemName = new JTextField();
-        JTextField itemPrice = new JTextField();
-        JTextField numberInStock = new JTextField();
-
-        JComboBox<ItemType> itemType = new JComboBox(itemTypes);
-        
-
-        Object [] infoNeeded = {"Item Name",itemName,"Item Price",itemPrice,"Item Type",itemType,"Number in Stock", numberInStock};
-        
-        int button = JOptionPane.showConfirmDialog(this, infoNeeded, "New Item", JOptionPane.OK_CANCEL_OPTION);
-        
-        if(button == JOptionPane.OK_OPTION){
-            store.add(new Item(itemName.getText(),Integer.parseInt(itemPrice.getText()),(ItemType) itemType.getSelectedItem(),Long.parseLong(numberInStock.getText())));
-            updateInventoryPanel();
-            setActivePanel(inventoryPanel);
-        }
-    }
 }

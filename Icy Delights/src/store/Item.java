@@ -10,43 +10,44 @@ public class Item {
 
     private int binNumber;
     private long amountInStock;
-    private int price;
     private String label;
     private ItemType itemType;
 
-    public Item(String label,int price, ItemType itemType, long amountInStock){
+    public Item(String label, ItemType itemType, long amountInStock){
         this.label = label;
-        this.price = price;
+        this.itemType = itemType;
+        this.amountInStock = amountInStock;
+        this.binNumber = nextBinNumber++;
+    }
+
+    public Item(String label, ItemType itemType, long amountInStock,int binNumber){
+        this.label = label;
         this.itemType = itemType;
         this.amountInStock = amountInStock;
 
         this.binNumber = nextBinNumber++;
     }
 
-    // public Item(BufferedReader br) throws IOException {
-    //     this.label = br.readLine();
-    //     this.price = Integer.parseInt(br.readLine());
-    //     // this.itemType = (ItemType) br.readLine();
-    //     this.amountInStock = Long.parseLong(br.readLine());
+    public Item(String br){
+        String [] infoNeeded = br.split(" ");
+        this.label = infoNeeded[0];
+        this.itemType = infoNeeded[1].equals("FLAVOR")?ItemType.FLAVOR:ItemType.TOPPING;
+        this.amountInStock = Long.parseLong(infoNeeded[2]);
+        this.binNumber = Integer.parseInt(infoNeeded[3]);
 
-    //     this.binNumber = Integer.parseInt(br.readLine());
-    // }
+        nextBinNumber = binNumber + 1;
+    }
 
     public void save(BufferedWriter bw) throws IOException {
-        bw.write(label + '\n');
-        bw.write("" + Integer.toString(price) + '\n');
-        // bw.write(itemType + '\n');
-        bw.write("" + Long.toString(amountInStock) + '\n');
+        bw.write(label + ' ');
+        bw.write(itemType.toString() + ' ');
+        bw.write("" + Long.toString(amountInStock) + ' ');
 
         bw.write("" + Integer.toString(binNumber) + '\n');
     }
 
-    public long getPrice(){
-        return price;
-    }
-
     @Override
     public String toString(){
-        return String.format("#%04d    %-20s $%05.2f %-20s %s%n",binNumber,label,price/100.0, itemType, amountInStock);
+        return String.format("#%04d    %-20s %-20s %s%n",binNumber,label, itemType, amountInStock);
     }
 }
