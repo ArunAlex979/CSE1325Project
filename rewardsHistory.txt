@@ -1,0 +1,5 @@
+name      , Phone Number , reward points
+Alex Arun,2144389490,979
+Joel,1234,454551
+John Doe,4685438534,34534
+Jane Smith,8563247497,543
