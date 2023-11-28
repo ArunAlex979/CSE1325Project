@@ -1,12 +1,7 @@
 package gui;
-
 import store.*;
-
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import java.awt.*;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -1212,14 +1207,16 @@ try {
     JTextField  nameFinishPanel;
     JTextField  phoneNumberFinishPanel;
     JTextField  emailFinishPanel;
-   
+    JTextField  rewardPointsFinishPanel;
 
 
-        totalFinishPanel = new JTextField();
-        nameFinishPanel = new JTextField();
-        phoneNumberFinishPanel = new JTextField();
-        emailFinishPanel = new JTextField();
-        totalFinishPanel.setFont(myFont);
+    totalFinishPanel = new JTextField();
+    nameFinishPanel = new JTextField();
+    phoneNumberFinishPanel = new JTextField();
+    emailFinishPanel = new JTextField();
+    rewardPointsFinishPanel = new JTextField();
+    rewardPointsFinishPanel.setFont(myFont);
+    totalFinishPanel.setFont(myFont);
 
     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
     JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
@@ -1236,16 +1233,19 @@ try {
    JButton submitEmailLogo       = new JButton("Submit");
 
    double exchangeRate = 0.001; // 1000 reward point is $1
-    double cash = rewardPoints * exchangeRate;
-if (name != null){
-    nameFinishPanel.setText(name);
-   }
-   if (phoneNumber != null){
-    phoneNumberFinishPanel.setText(phoneNumber);
-   }
-    if (lastLine != null){
-    totalFinishPanel.setText("$"+lastLine);
-   }
+   double cash = rewardPoints * exchangeRate;
+   if (name != null){
+   nameFinishPanel.setText(name);
+  }
+  if (phoneNumber != null){
+   phoneNumberFinishPanel.setText(phoneNumber);
+  }
+   if (lastLine != null){
+   totalFinishPanel.setText("$"+lastLine+" - ($"+cash+")");
+  }
+   if (rewardPoints != -1){
+   rewardPointsFinishPanel.setText("Your Reward Points: "+rewardPoints);
+  }
  
 
     nameLogo.setFont(myFont);
@@ -1275,7 +1275,7 @@ if (name != null){
    
 
     finishPanel.add(logofinishPanel);
-    finishPanel.add(logo2finishPanel);
+    finishPanel.add(rewardPointsFinishPanel);
     finishPanel.add(finishPanelAdminButton);
 
     finishPanel.add(nameLogo);
