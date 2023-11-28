@@ -203,8 +203,6 @@ public class TerminalWindow  extends JFrame{
         previousCustomerPanel.add(previousCustomerPanelSubmit);
         previousCustomerPanel.add(previousCustomerPanelAdminButton);
 
-
-
         previousCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
         previousCustomerPanelSubmit.addActionListener(event -> orderonCustomerClick());
         previousCustomerPanel.setLayout(new GridLayout(5, 0, 20, 30));
@@ -216,23 +214,15 @@ public class TerminalWindow  extends JFrame{
            // customerName[0] = nameFinishPanel.getText();
             System.out.println("Phone Number: " + inputPhoneNumber.getText());
 
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("previousCustomerPanelcustomerPhoneOutput.txt"));
+                writer.write(inputPhoneNumber.getText()+"\n" );
 
-try {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("previousCustomerPanelcustomerPhoneOutput.txt"));
-        writer.write(inputPhoneNumber.getText()+"\n" );
-         
-       
-
-
-        writer.close();
-    } catch (IOException e1) {
-        e1.printStackTrace();
-    } 
+                writer.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } 
         }
-
-
-
-
 
     };
  
@@ -1352,10 +1342,6 @@ try {
     } 
         }
     };
-
-
-
-
     submitNameLogo.addActionListener(submitNameLogoClickListener);
     submitPhoneLogo.addActionListener(submitPhoneLogoClickListener);
     submitEmailLogo.addActionListener(submitEmailLogoClickListener);
@@ -1373,20 +1359,13 @@ try {
 
 finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
 
-
-
-
     }
      
 }
-
    // System.out.println(   reader.readLine());
     reader.close(); 
 } catch (IOException e1) {
-  
-    e1.printStackTrace();
-
-    
+    e1.printStackTrace();    
 }
 
     }
@@ -1398,6 +1377,8 @@ finishPanel.setLayout(new GridLayout(5, 3, 20, 30));
     protected void onCustomerInfoClick(){
         
         System.out.println("Customer Info Button Clicked");
+
+        
         
     }
     protected void onInventoryClick(){
@@ -1450,20 +1431,6 @@ protected void newCustomerClick(){
         System.out.println("Previous Customer Panel Button Clicked");
 
          setActivePanel(previousCustomerPanel);
-
-    //     JTextField Name = new JTextField();
-    //     JTextField phoneNumber = new JTextField();
-    //     JTextField email = new JTextField();
-
-    //    // JComboBox<ItemType> itemType = new JComboBox(itemTypes);
-
-    //     Object [] infoNeeded = {"Name",Name,"Phone Number",phoneNumber,"Email", email};
-      
-    //     int button = JOptionPane.showConfirmDialog(this, infoNeeded, "PREVOIUS CUSTOMER INFO", JOptionPane.OK_CANCEL_OPTION);
-         
-    //     if(button == JOptionPane.OK_OPTION){
-    //         setActivePanel(customerPanel);
-    //     }
 
     }
     
