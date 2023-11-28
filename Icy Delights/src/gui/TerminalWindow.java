@@ -355,48 +355,6 @@ try {
         // Setup Panel
         customerPanel = new JPanel();
 
-       /* 
-        JRadioButton vanillaButton; 
-        JRadioButton ChocolateButton; 
-        JRadioButton strawberryButton;
-
-        ImageIcon vanillaIcon;
-        
-        ImageIcon ChocolateIcon;
-        ImageIcon strawberryIcon;
-        
-        
-
-        customerPanel.setLayout(new FlowLayout());
-
-    // vanillaIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\vanilla.png");
-    // ChocolateIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\chocolate.png");
-    // strawberryIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\strawberry.png");
-    
-  //hotdogIcon = new ImageIcon("hotdog.png");
-  //String pizza = "pizza"; 
-  vanillaButton = new JRadioButton("Vanilla");
-  ChocolateButton = new JRadioButton("Chocolate");
-  strawberryButton = new JRadioButton("Strawberry");
-  ButtonGroup group = new ButtonGroup();
-    group.add(vanillaButton);
-    group.add(ChocolateButton);
-    group.add(strawberryButton);
-
-
-// vanillaButton.setIcon(vanillaIcon);
-// ChocolateButton.setIcon(ChocolateIcon);
-// strawberryButton.setIcon(strawberryIcon);
-
-
-vanillaButton.addActionListener(event -> TESTClick("Vanilla "));
-ChocolateButton.addActionListener(event -> TESTClick("Chocolate "));
-strawberryButton.addActionListener(event -> TESTClick("Strawberry "));
-
-customerPanel.add(vanillaButton);
-customerPanel.add(ChocolateButton);
-customerPanel.add(strawberryButton);
-*/
        // Create Fields
         TextField textRow1 = new TextField(20);
         TextField textRow2 = new TextField(20);
@@ -413,8 +371,6 @@ customerPanel.add(strawberryButton);
         JButton customerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
         JButton customerPanelBackButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\back.png"));
 
-        
-        
         String vanillaString = "$2.45 Vanilla "; 
         String chocolateString = "$2.30 Chocolate ";
         String strawberryString = "$3.00 Strawberry ";
@@ -454,19 +410,6 @@ customerPanel.add(strawberryButton);
         // Add Listeners
     customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
     
-
-
-// textRow1.setText("Vanilla Button Clicked");
-
-     
-// String filePath = "orderCusINFO.txt"; // Update with the actual file path
-//     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-//         while (reader.readLine() == null) {
-        
-//             System.out.println("Hello");
-        
-//         }
-//     }
 
 // Add Buttons
         customerPanel.add(logoCustomerPanel);
@@ -624,181 +567,7 @@ customerPanel.add(strawberryButton);
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // Finish Panel ////////////////////////////////////////////////////////////////////////////////////
     
-//    finishPanel = new JPanel();
-//     //JFrame finishframe = new JFrame("Finish Page");  
 
-//     finishPanel = new JPanel();
-
-//     JTextField totalFinishPanel;
-//     JTextField  nameFinishPanel;
-//     JTextField  phoneNumberFinishPanel;
-//     JTextField  emailFinishPanel;
-   
-
-
-//         totalFinishPanel = new JTextField();
-//         nameFinishPanel = new JTextField();
-//         phoneNumberFinishPanel = new JTextField();
-//         emailFinishPanel = new JTextField();
-//         totalFinishPanel.setFont(myFont);
-
-//     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
-//     JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
-
-//     JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-//    JButton nameLogo       = new JButton("Enter Your Name Here -->");
-//    JButton phoneLogo       = new JButton("Enter Your Phone Number Here -->");
-//    JButton emailLogo       = new JButton("Enter Your Email Here -->");
-//    JButton totalLogo       = new JButton("Your Total -->");
-      
-//    JButton submitTotalLogo       = new JButton("Place Order");
-//    JButton submitNameLogo       = new JButton("Submit");
-//    JButton submitPhoneLogo       = new JButton("Submit");
-//    JButton submitEmailLogo       = new JButton("Submit");
-
-
-
-//     nameLogo.setFont(myFont);
-//     phoneLogo.setFont(myFont);
-//     emailLogo.setFont(myFont);
-//     totalLogo.setFont(myFont);
-
-//     submitTotalLogo.setFont(myFont);
-//     submitNameLogo.setFont(myFont);
-//     submitPhoneLogo.setFont(myFont);
-//     submitEmailLogo.setFont(myFont);
-
-//     // color 
-//     finishPanelAdminButton.setBackground(colors[4]);
-//     logofinishPanel.setBackground(colors[4]);
-//     logo2finishPanel.setBackground(colors[4]);
-//     nameLogo.setBackground(colors[4]);
-//     phoneLogo.setBackground(colors[4]);
-//     emailLogo.setBackground(colors[4]);
-//     totalLogo.setBackground(colors[4]);
-
-   
-
-//     finishPanel.add(logofinishPanel);
-//     finishPanel.add(logo2finishPanel);
-//     finishPanel.add(finishPanelAdminButton);
-
-//     finishPanel.add(nameLogo);
-//     finishPanel.add(nameFinishPanel);
-//     finishPanel.add(submitNameLogo);
-
-//     finishPanel.add(phoneLogo);
-//     finishPanel.add(phoneNumberFinishPanel);
-//     finishPanel.add(submitPhoneLogo);
-
-//     finishPanel.add(emailLogo); 
-//     finishPanel.add(emailFinishPanel); 
-//     finishPanel.add(submitEmailLogo);
-
-//     finishPanel.add(totalLogo);
-//     finishPanel.add(totalFinishPanel);
-//     finishPanel.add(submitTotalLogo);
-
-//     // // save  customer name / phone Number / Email in a text file.  write 
-//     // try {
-//     //     BufferedWriter writer = new BufferedWriter(new FileWriter("customerOutput.txt"));
-//     //     writer.write("text write ");
-//     //     writer.write("\n here is another line text write ");
-//     //     writer.close();
-//     // } catch (IOException e1) {
-//     //     // TODO Auto-generated catch block
-//     //     e1.printStackTrace();
-//     // } 
-// // reader form the file 
-// // try {
-// //     BufferedReader reader  = new BufferedReader(new FileReader ("customerOutput.txt"));
-// //     String line; 
-// //     while ((line = reader.readLine()) != null) {
-// //         System.out.println(line);
-// //     }
-// //    // System.out.println(   reader.readLine());
-// //     reader.close(); 
-// // } catch (IOException e1) {
-// //     // TODO Auto-generated catch block
-// //     e1.printStackTrace();
-// // }
-
-
-//  //final String[] customerName = {""};
-
- 
-
-//     ActionListener submitNameLogoClickListener = new ActionListener() {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-            
-//            // customerName[0] = nameFinishPanel.getText();
-//             System.out.println("Name: " + nameFinishPanel.getText());
-
-
-// try {
-//         BufferedWriter writer = new BufferedWriter(new FileWriter("customerNameOutput.txt"));
-//         writer.write(nameFinishPanel.getText() );
-//         writer.close();
-//     } catch (IOException e1) {
-//         e1.printStackTrace();
-//     } 
-//         }
-//     };
-
-    
-
-//     ActionListener submitPhoneLogoClickListener = new ActionListener() {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-//         System.out.println("Phone #: " + phoneNumberFinishPanel.getText());
-
-
-// try {
-//         BufferedWriter writer2 = new BufferedWriter(new FileWriter("customerPhone#Output.txt"));
-//        // writer2.write("\n");
-//         writer2.write( phoneNumberFinishPanel.getText() );
-//         writer2.close();
-//     } catch (IOException e1) {
-//         e1.printStackTrace();
-//     } 
-//         }
-//     };
-    
-//     ActionListener submitEmailLogoClickListener = new ActionListener() {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-//             System.out.println("Email: " + emailFinishPanel.getText());
-
-
-// try {
-//         BufferedWriter writer3 = new BufferedWriter(new FileWriter("customerEmailOutput.txt"));
-//         //writer3.write("\n");
-//         writer3.write(emailFinishPanel.getText());
-//         writer3.close();
-//     } catch (IOException e1) {
-//         e1.printStackTrace();
-//     } 
-//         }
-//     };
-
-
-
-
-//     submitNameLogo.addActionListener(submitNameLogoClickListener);
-//     submitPhoneLogo.addActionListener(submitPhoneLogoClickListener);
-//     submitEmailLogo.addActionListener(submitEmailLogoClickListener);
-
-//     finishPanelAdminButton.addActionListener(event -> onLogoutClick());
-
-//     // finishframe.add(finishPanel);  
-//     // finishframe.setSize(200, 300);  
-//     // finishframe.setLocationRelativeTo(null);  
-//     // finishframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-//     // finishframe.setVisible(true);
- 
- 
-    // finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Inventory Panel /////////////////////////////////////////////////////////////////////////////////

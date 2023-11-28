@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer implements Comparable{
     
     private String firstName;
     private String lastName;
@@ -56,5 +56,9 @@ public class Customer {
             return String.format("%s test",firstName);
         else
             return String.format("%-5s, %-5 %-10s %d",lastName, firstName, email, phoneNumber);
+    }
+    @Override
+    public int compareTo(Object o){
+        return (int) (phoneNumber - (int) o);
     }
 }
