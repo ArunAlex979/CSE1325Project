@@ -724,24 +724,10 @@ try{
   }catch (Exception e){
 	 System.err.println("Error while writing to file: " +
           e.getMessage());
-  }
-
-
-
-
-
-
-
-            
+  }  
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-  
-
-
     return 1;
 
 //   try{
@@ -1187,7 +1173,7 @@ protected void newCustomerClick(){
 
         System.out.println("newPlaceOrderPanel Customer Panel Button Clicked");
           setActivePanel(bootPanel);
-        Object [] infoNeeded = {"Thank For Ordering At Icy Delights"};
+        Object [] infoNeeded = {"Thank You For Ordering At Icy Delights"};
         int button = JOptionPane.showConfirmDialog(this, infoNeeded, "Thank You", JOptionPane.OK_CANCEL_OPTION);
         
         if(button == JOptionPane.OK_OPTION){
@@ -1286,6 +1272,9 @@ protected void newCustomerClick(){
 
         setActivePanel(menuPanel);
         
+    }
+
+    public void run() {
     }
 
 }
