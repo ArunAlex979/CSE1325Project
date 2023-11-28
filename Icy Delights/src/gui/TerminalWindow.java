@@ -53,7 +53,17 @@ public class TerminalWindow  extends JFrame{
     new FileWriter("customerEmailOutput.txt", false).close();
     new FileWriter("customerNameOutput.txt", false).close();
     new FileWriter("customerPhone#Output.txt", false).close();
-    //new FileWriter("finishPageINFO.txt", false).close();
+    new FileWriter("finishPageINFO.txt", false).close();
+
+    try{
+	  FileWriter fstream = new FileWriter("finishPageINFO.txt",true);
+	  BufferedWriter out = new BufferedWriter(fstream);
+	  out.write("YourName,1234567890,000");
+	  out.close();
+  }catch (Exception e){
+	    System.err.println("Error while writing to file: " +
+        e.getMessage());
+  }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Admin Panel /////////////////////////////////////////////////////////////////////////////////////
@@ -676,6 +686,8 @@ try {
     JButton submitPhoneLogo       = new JButton("Submit");
     JButton submitEmailLogo       = new JButton("Submit");
 
+    double exchangeRate = 0.001; // 1000 reward point is $1
+    double cash = rewardPoints * exchangeRate;
     if (name != null){
     nameFinishPanel.setText(name);
    }
@@ -683,12 +695,11 @@ try {
     phoneNumberFinishPanel.setText(phoneNumber);
    }
     if (lastLine != null){
-    totalFinishPanel.setText("$"+lastLine);
+    totalFinishPanel.setText("$"+lastLine+" - ($"+cash+")");
    }
     if (rewardPoints != -1){
     rewardPointsFinishPanel.setText("Your Reward Points: "+rewardPoints);
    }
- 
     nameLogo.setFont(myFont);
     phoneLogo.setFont(myFont);
     emailLogo.setFont(myFont);
