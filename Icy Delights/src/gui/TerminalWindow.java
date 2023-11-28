@@ -64,7 +64,15 @@ public class TerminalWindow  extends JFrame{
     new FileWriter("customerPhone#Output.txt", false).close();
     new FileWriter("finishPageINFO.txt", false).close();
 
-
+    try{
+        FileWriter fstream = new FileWriter("finishPageINFO.txt",true);
+        BufferedWriter out = new BufferedWriter(fstream);
+        out.write("YourName,1234567890,000");
+        out.close();
+    }catch (Exception e){
+          System.err.println("Error while writing to file: " +
+          e.getMessage());
+    }
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1227,6 +1235,8 @@ try {
    JButton submitPhoneLogo       = new JButton("Submit");
    JButton submitEmailLogo       = new JButton("Submit");
 
+   double exchangeRate = 0.001; // 1000 reward point is $1
+    double cash = rewardPoints * exchangeRate;
 if (name != null){
     nameFinishPanel.setText(name);
    }
