@@ -1,12 +1,7 @@
 package gui;
-
 import store.*;
-
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import java.awt.*;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +16,6 @@ public class TerminalWindow  extends JFrame{
     
     private Store store;
     private File fileName = new File("Icy Delights\\src\\gui\\recources\\SavedInfo.txt");
-
     private JPanel activePanel;
     private JPanel bootPanel;
     private JPanel adminPanel;
@@ -32,7 +26,6 @@ public class TerminalWindow  extends JFrame{
     private JPanel previousOrNewCustomerPanel;
     private JPanel previousCustomerPanel;
     private JPanel newCustomerPanel;
-
     private JButton returnButton;
     private JButton addItemButton;
     private JButton addProductButton;
@@ -51,8 +44,6 @@ public class TerminalWindow  extends JFrame{
 	Color colors[] = new Color[5];
 	colors[4] = new Color(238,238,238);
 
-
-
         // cleares all of the data off the files 
     new FileWriter("total.txt", false).close();
     new FileWriter("orderCusINFO.txt", false).close();
@@ -62,10 +53,7 @@ public class TerminalWindow  extends JFrame{
     new FileWriter("customerEmailOutput.txt", false).close();
     new FileWriter("customerNameOutput.txt", false).close();
     new FileWriter("customerPhone#Output.txt", false).close();
-    new FileWriter("finishPageINFO.txt", false).close();
-
-
-
+    //new FileWriter("finishPageINFO.txt", false).close();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Admin Panel /////////////////////////////////////////////////////////////////////////////////////
@@ -104,15 +92,12 @@ public class TerminalWindow  extends JFrame{
         toolbar   .add(loadButton);
         adminPanel.add(toolbar, BorderLayout.PAGE_START);
         
-
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Boot Panel //////////////////////////////////////////////////////////////////////////////////////
 
         // We are using BorderLayout for the boot panael 
        bootPanel = new JPanel(new BorderLayout(100,100));
 
-        
         // Create Fields
         JButton logoBootPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logo.png")); 
 
@@ -127,18 +112,12 @@ public class TerminalWindow  extends JFrame{
         logoBootPanel.setBackground(colors[4]);
         // Add Listeners
         adminButton   .addActionListener(event -> onAdminClick());
-        //customerButton.addActionListener(event -> onCustomerClick());
         customerButton.addActionListener(event -> onCustomerClick());
 
         // Add Buttons
         bootPanel.add(adminButton, BorderLayout.SOUTH);
-      
-        
         bootPanel.add(logoBootPanel, BorderLayout.NORTH);
-
         bootPanel.add(customerButton, BorderLayout.CENTER);
-
-
         Font myFont = new Font("Ink Free",Font.BOLD,30);
         Font smallFont = new Font("Ink Free",Font.BOLD,20);
 
@@ -165,20 +144,13 @@ public class TerminalWindow  extends JFrame{
         previousOrNewCustomerPanel.add(PreviousOrNewCustomerPanelAdminButton, BorderLayout.SOUTH);
         previousOrNewCustomerPanel.add(logoPreviousOrNewCustomerPanel, BorderLayout.NORTH);
         previousOrNewCustomerPanel.add(previousCustomerButton, BorderLayout.WEST);
-
         previousOrNewCustomerPanel.add(newCustomerButton, BorderLayout.CENTER);
-
         PreviousOrNewCustomerPanelAdminButton   .addActionListener(event -> onAdminClick());
         previousCustomerButton.addActionListener(event -> previousCustomerPanelClick());
-        
-        //newCustomerButton.addActionListener(event -> newCustomerClick());
         newCustomerButton.addActionListener(event -> orderonCustomerClick());
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Previous Customer Panel /////////////////////////////////////////////////////////////////////////
-
-       // previousCustomerPanel = new JPanel(new BorderLayout(100,100));
         previousCustomerPanel = new JPanel();
         // Create Fields
         TextField inputPhoneNumber = new TextField(20);
@@ -203,51 +175,31 @@ public class TerminalWindow  extends JFrame{
         previousCustomerPanel.add(previousCustomerPanelSubmit);
         previousCustomerPanel.add(previousCustomerPanelAdminButton);
 
-
-
         previousCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
         previousCustomerPanelSubmit.addActionListener(event -> orderonCustomerClick());
         previousCustomerPanel.setLayout(new GridLayout(5, 0, 20, 30));
       
-   ActionListener inputPhoneNumberClickListener = new ActionListener() {
+        ActionListener inputPhoneNumberClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
-           // customerName[0] = nameFinishPanel.getText();
-            System.out.println("Phone Number: " + inputPhoneNumber.getText());
-
+        System.out.println("Phone Number: " + inputPhoneNumber.getText());
 
 try {
         BufferedWriter writer = new BufferedWriter(new FileWriter("previousCustomerPanelcustomerPhoneOutput.txt"));
         writer.write(inputPhoneNumber.getText()+"\n" );
-         
-       
-
-
         writer.close();
     } catch (IOException e1) {
         e1.printStackTrace();
     } 
         }
-
-
-
-
-
     };
  
-
       ActionListener searchPhoneNumberClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-        
-            // searchPhoneNumber(inputPhoneNumber.getText());
-
-           String filePath = "rewardsHistory.txt";
-        
+        String filePath = "rewardsHistory.txt";
         String phoneNumberToSearch = inputPhoneNumber.getText();
         String  normalizePhoneNumber = phoneNumberToSearch.replaceAll("[\\s\\-\\(\\)]+", "");
-
 
  try {
 
@@ -259,13 +211,9 @@ try {
                     String name = parts[0];
                     String phoneNumber = parts[1];
                     int rewardPoints = Integer.parseInt(parts[2]);
-
-
 try {
         BufferedWriter writer = new BufferedWriter(new FileWriter("currentOrderINFO.txt"));
         writer.write(name+","+phoneNumber+","+rewardPoints+"\n"  );
-
-
  try {
         BufferedWriter writer2 = new BufferedWriter(new FileWriter("finishPageINFO.txt"));
         writer2.write(name+","+phoneNumber+","+rewardPoints+"\n"  );
@@ -274,9 +222,6 @@ try {
     } catch (IOException e1) {
         e1.printStackTrace();
     }
-
-
-
          if (phoneNumber != phoneNumberToSearch){
                         System.out.println("Phone Number not found");
                     }
@@ -287,31 +232,19 @@ try {
                     System.out.println("Name: " + name);
                     System.out.println("Phone Number: " + phoneNumber);
                     System.out.println("Reward Points: " + rewardPoints);
-                   
-
                     break;
                 }
             }
-
             // Close the file
             reader.close();
-
-
-            
-
-
         } catch (IOException ei) {
             ei.printStackTrace();
         }
             
-    
             }
     };
 
     previousCustomerPanelSubmit.addActionListener(searchPhoneNumberClickListener);
-
-   // searchPhoneNumber(inputPhoneNumber.getText());
-
     previousCustomerPanelSubmit.addActionListener(inputPhoneNumberClickListener);
 
 
@@ -321,68 +254,17 @@ try {
         newCustomerPanel = new JPanel();
         JButton logonewCustomerPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoD.png")); 
         JButton newCustomerPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-        
         JButton newCustomerPanelSubmit = new JButton("Submit");
-
-       
-
         newCustomerPanel.add(logonewCustomerPanel);
         newCustomerPanel.add(newCustomerPanelAdminButton);
         newCustomerPanel.add(newCustomerPanelSubmit);
-
-         newCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
-
-         
-        //newCustomerPanel.add(new JLabel(String.format("%-7s %-15s %-4s %-15s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
-
+        newCustomerPanelAdminButton   .addActionListener(event -> onLogoutClick());
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Customer Panel //////////////////////////////////////////////////////////////////////////////////
  
         // Setup Panel
         customerPanel = new JPanel();
 
-       /* 
-        JRadioButton vanillaButton; 
-        JRadioButton ChocolateButton; 
-        JRadioButton strawberryButton;
-
-        ImageIcon vanillaIcon;
-        
-        ImageIcon ChocolateIcon;
-        ImageIcon strawberryIcon;
-        
-        
-
-        customerPanel.setLayout(new FlowLayout());
-
-    // vanillaIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\vanilla.png");
-    // ChocolateIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\chocolate.png");
-    // strawberryIcon = new ImageIcon("Icy Delights\\src\\gui\\recources\\strawberry.png");
-    
-  //hotdogIcon = new ImageIcon("hotdog.png");
-  //String pizza = "pizza"; 
-  vanillaButton = new JRadioButton("Vanilla");
-  ChocolateButton = new JRadioButton("Chocolate");
-  strawberryButton = new JRadioButton("Strawberry");
-  ButtonGroup group = new ButtonGroup();
-    group.add(vanillaButton);
-    group.add(ChocolateButton);
-    group.add(strawberryButton);
-
-
-// vanillaButton.setIcon(vanillaIcon);
-// ChocolateButton.setIcon(ChocolateIcon);
-// strawberryButton.setIcon(strawberryIcon);
-
-
-vanillaButton.addActionListener(event -> TESTClick("Vanilla "));
-ChocolateButton.addActionListener(event -> TESTClick("Chocolate "));
-strawberryButton.addActionListener(event -> TESTClick("Strawberry "));
-
-customerPanel.add(vanillaButton);
-customerPanel.add(ChocolateButton);
-customerPanel.add(strawberryButton);
-*/
        // Create Fields
         TextField textRow1 = new TextField(20);
         TextField textRow2 = new TextField(20);
@@ -439,20 +321,6 @@ customerPanel.add(strawberryButton);
         
         // Add Listeners
     customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
-    
-
-
-// textRow1.setText("Vanilla Button Clicked");
-
-     
-// String filePath = "orderCusINFO.txt"; // Update with the actual file path
-//     try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-//         while (reader.readLine() == null) {
-        
-//             System.out.println("Hello");
-        
-//         }
-//     }
 
 // Add Buttons
         customerPanel.add(logoCustomerPanel);
@@ -480,39 +348,14 @@ customerPanel.add(strawberryButton);
     customerPanel.add(finish);
     customerPanel.add(customerPanelBackButton);
     textRow1.setText("Welcome To Icy Delights ");
-    
- 
-  
-
-   // vanilla.addActionListener(event -> textfield.setText("Added Vanilla ice cream"));
-   
     finish.addActionListener(event -> finishOnClick());
     customerPanelBackButton.addActionListener(event -> onCustomerClick());
     customerPanel.setLayout(new GridLayout(5, 5, 20, 30));
-
-    // String firstString = "Hello";
-    // String secondString = "World";
-    // String combinedString = firstString.concat(secondString);
-    // System.out.println(combinedString);
-
-
-
-
-    // String combinedString = "";
-    // String combinedStringPre = "";
-
-
     ActionListener vanillaClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // //  String combinedString = combinedStringPre.concat(vanillaString);
-            //  textRow1.setText(combinedString);
             textRow2.setText("Vanilla Added to Cart");
-            
              TESTClick("($2.45 Vanilla) ");
-             //  vanilla.setBackground(colors[4]);
-
-
         }
     };
    
@@ -520,9 +363,6 @@ customerPanel.add(strawberryButton);
         @Override
         public void actionPerformed(ActionEvent e) {
             textRow2.setText("Chocolate Added to Cart");
-            // String tempCombinedString = ""; 
-            // tempCombinedString = tempCombinedString.concat(chocolateString);
-            // textRow1.setText(tempCombinedString);
            TESTClick("($2.30 Chocolate) ");
         }
     };
@@ -604,187 +444,6 @@ customerPanel.add(strawberryButton);
     banana.addActionListener(bananaClickListener);
     peach.addActionListener(peachClickListener);
     caramel.addActionListener(caramelClickListener);
-   
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Finish Panel ////////////////////////////////////////////////////////////////////////////////////
-    
-//    finishPanel = new JPanel();
-//     //JFrame finishframe = new JFrame("Finish Page");  
-
-//     finishPanel = new JPanel();
-
-//     JTextField totalFinishPanel;
-//     JTextField  nameFinishPanel;
-//     JTextField  phoneNumberFinishPanel;
-//     JTextField  emailFinishPanel;
-   
-
-
-//         totalFinishPanel = new JTextField();
-//         nameFinishPanel = new JTextField();
-//         phoneNumberFinishPanel = new JTextField();
-//         emailFinishPanel = new JTextField();
-//         totalFinishPanel.setFont(myFont);
-
-//     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
-//     JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
-
-//     JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-//    JButton nameLogo       = new JButton("Enter Your Name Here -->");
-//    JButton phoneLogo       = new JButton("Enter Your Phone Number Here -->");
-//    JButton emailLogo       = new JButton("Enter Your Email Here -->");
-//    JButton totalLogo       = new JButton("Your Total -->");
-      
-//    JButton submitTotalLogo       = new JButton("Place Order");
-//    JButton submitNameLogo       = new JButton("Submit");
-//    JButton submitPhoneLogo       = new JButton("Submit");
-//    JButton submitEmailLogo       = new JButton("Submit");
-
-
-
-//     nameLogo.setFont(myFont);
-//     phoneLogo.setFont(myFont);
-//     emailLogo.setFont(myFont);
-//     totalLogo.setFont(myFont);
-
-//     submitTotalLogo.setFont(myFont);
-//     submitNameLogo.setFont(myFont);
-//     submitPhoneLogo.setFont(myFont);
-//     submitEmailLogo.setFont(myFont);
-
-//     // color 
-//     finishPanelAdminButton.setBackground(colors[4]);
-//     logofinishPanel.setBackground(colors[4]);
-//     logo2finishPanel.setBackground(colors[4]);
-//     nameLogo.setBackground(colors[4]);
-//     phoneLogo.setBackground(colors[4]);
-//     emailLogo.setBackground(colors[4]);
-//     totalLogo.setBackground(colors[4]);
-
-   
-
-//     finishPanel.add(logofinishPanel);
-//     finishPanel.add(logo2finishPanel);
-//     finishPanel.add(finishPanelAdminButton);
-
-//     finishPanel.add(nameLogo);
-//     finishPanel.add(nameFinishPanel);
-//     finishPanel.add(submitNameLogo);
-
-//     finishPanel.add(phoneLogo);
-//     finishPanel.add(phoneNumberFinishPanel);
-//     finishPanel.add(submitPhoneLogo);
-
-//     finishPanel.add(emailLogo); 
-//     finishPanel.add(emailFinishPanel); 
-//     finishPanel.add(submitEmailLogo);
-
-//     finishPanel.add(totalLogo);
-//     finishPanel.add(totalFinishPanel);
-//     finishPanel.add(submitTotalLogo);
-
-//     // // save  customer name / phone Number / Email in a text file.  write 
-//     // try {
-//     //     BufferedWriter writer = new BufferedWriter(new FileWriter("customerOutput.txt"));
-//     //     writer.write("text write ");
-//     //     writer.write("\n here is another line text write ");
-//     //     writer.close();
-//     // } catch (IOException e1) {
-//     //     // TODO Auto-generated catch block
-//     //     e1.printStackTrace();
-//     // } 
-// // reader form the file 
-// // try {
-// //     BufferedReader reader  = new BufferedReader(new FileReader ("customerOutput.txt"));
-// //     String line; 
-// //     while ((line = reader.readLine()) != null) {
-// //         System.out.println(line);
-// //     }
-// //    // System.out.println(   reader.readLine());
-// //     reader.close(); 
-// // } catch (IOException e1) {
-// //     // TODO Auto-generated catch block
-// //     e1.printStackTrace();
-// // }
-
-
-//  //final String[] customerName = {""};
-
- 
-
-//     ActionListener submitNameLogoClickListener = new ActionListener() {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-            
-//            // customerName[0] = nameFinishPanel.getText();
-//             System.out.println("Name: " + nameFinishPanel.getText());
-
-
-// try {
-//         BufferedWriter writer = new BufferedWriter(new FileWriter("customerNameOutput.txt"));
-//         writer.write(nameFinishPanel.getText() );
-//         writer.close();
-//     } catch (IOException e1) {
-//         e1.printStackTrace();
-//     } 
-//         }
-//     };
-
-    
-
-//     ActionListener submitPhoneLogoClickListener = new ActionListener() {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-//         System.out.println("Phone #: " + phoneNumberFinishPanel.getText());
-
-
-// try {
-//         BufferedWriter writer2 = new BufferedWriter(new FileWriter("customerPhone#Output.txt"));
-//        // writer2.write("\n");
-//         writer2.write( phoneNumberFinishPanel.getText() );
-//         writer2.close();
-//     } catch (IOException e1) {
-//         e1.printStackTrace();
-//     } 
-//         }
-//     };
-    
-//     ActionListener submitEmailLogoClickListener = new ActionListener() {
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-//             System.out.println("Email: " + emailFinishPanel.getText());
-
-
-// try {
-//         BufferedWriter writer3 = new BufferedWriter(new FileWriter("customerEmailOutput.txt"));
-//         //writer3.write("\n");
-//         writer3.write(emailFinishPanel.getText());
-//         writer3.close();
-//     } catch (IOException e1) {
-//         e1.printStackTrace();
-//     } 
-//         }
-//     };
-
-
-
-
-//     submitNameLogo.addActionListener(submitNameLogoClickListener);
-//     submitPhoneLogo.addActionListener(submitPhoneLogoClickListener);
-//     submitEmailLogo.addActionListener(submitEmailLogoClickListener);
-
-//     finishPanelAdminButton.addActionListener(event -> onLogoutClick());
-
-//     // finishframe.add(finishPanel);  
-//     // finishframe.setSize(200, 300);  
-//     // finishframe.setLocationRelativeTo(null);  
-//     // finishframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-//     // finishframe.setVisible(true);
- 
- 
-    // finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Inventory Panel /////////////////////////////////////////////////////////////////////////////////
@@ -832,13 +491,7 @@ customerPanel.add(strawberryButton);
         this.setIconImage(logo);
         this.setSize(1500,800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        
     }
-
-    // public TerminalWindow(Store store){
-    //     this(store.name());
-    // }
 
     protected void onSaveClick(){
         System.out.println("Save Button Clicked");
@@ -868,32 +521,18 @@ customerPanel.add(strawberryButton);
     }
 
 
-   int TESTClick(String IceName){
-       // System.out.println("TEST Button Clicked");
-       
+   int TESTClick(String IceName){       
         System.out.println(IceName);
-        //setActivePanel(customerPanel);
-
-        //String inputString =IceName;
-
   try{
 	  FileWriter fstream = new FileWriter("order.txt",true);
 	  BufferedWriter out = new BufferedWriter(fstream);
-      //	  out.write("Line Added on: " + new java.util.Date()+"\n");
-
 	  out.write(IceName);
 	  out.close();
   }catch (Exception e){
-	 System.err.println("Error while writing to file: " +
-          e.getMessage());
+	    System.err.println("Error while writing to file: " +
+        e.getMessage());
   }
 
-
-
-
-
-
-//finishPageINFO.txt
 try {
     String inputString = new String(Files.readAllBytes(Paths.get("order.txt")));
 
@@ -942,125 +581,22 @@ try {
             
             System.out.println("Total True Prices: $" + totalTruePrices);
 
-
-
-
-
-
-
-
-
-
-    String str = String.valueOf(totalTruePrices);
-
+            String str = String.valueOf(totalTruePrices);
 
 try{
 	  FileWriter fstream = new FileWriter("finishPageINFO.txt",true);
 	  BufferedWriter out = new BufferedWriter(fstream);
-
 	  out.write("\n");
       out.write(str);
 	  out.close();
   }catch (Exception e){
 	 System.err.println("Error while writing to file: " +
           e.getMessage());
-  }
-
-
-
-
-
-
-
-            
+  }   
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-  
-
-
     return 1;
-
-//   try{
-// 	  FileWriter fstream = new FileWriter("order.txt",true);
-// 	  BufferedWriter out = new BufferedWriter(fstream);
-//       //	  out.write("Line Added on: " + new java.util.Date()+"\n");
-
-// 	  out.write(IceName);
-// 	  out.close();
-//   }catch (Exception e){
-// 	 System.err.println("Error while writing to file: " +
-//           e.getMessage());
-//   }
-  
-
-// try {
-//     BufferedReader reader  = new BufferedReader(new FileReader ("order.txt"));
-//     String line; 
-//     while ((line = reader.readLine()) != null) {
-//         System.out.println(line);
-
-//         String inputString = line; 
-
-//         // Split the input string into an array of names
-//         String[] names = inputString.split(" ");
-        
-//         // Create a HashMap to store the count of each name
-//         Map<String, Integer> nameCount = new HashMap<>();
-        
-//         // Count the occurrences of each name
-//         for (String name : names) {
-//             nameCount.put(name, nameCount.getOrDefault(name, 0) + 1);
-//         }
-        
-//         // Check if each name appears an odd or even number of times
-//         for (String name : nameCount.keySet()) {
-//             int count = nameCount.get(name);
-            
-//             System.out.println(name + ": " + (count % 2 == 0 ? "false" : "true"));
-
-
-
-
-//   try{
-// 	  FileWriter fstream = new FileWriter("total.txt",true);
-// 	  BufferedWriter out = new BufferedWriter(fstream);
-//       //	  out.write("Line Added on: " + new java.util.Date()+"\n");
-    
-
-//     out.write(name + ": " + (count % 2 == 0 ? "false" : "true"));
-//     out.write("\n");
-
-// 	out.close();
-     
-  
-
-//   }catch (Exception e){
-// 	 System.err.println("Error while writing to file: " +
-//           e.getMessage());
-//   }
-
-
-
-
-//         }
-
-       
-        
-//     }
-//     //System.out.println( " sdsdsd" +  reader.readLine());
-//     reader.close(); 
-// } catch (IOException e1) {
-
-//     e1.printStackTrace();
-// }
-
-
-//     return 1;
-  
   }
 
     private static String getNameByValue(Map<String, Double> map, double value) {
@@ -1070,48 +606,6 @@ try{
                 .findFirst()
                 .orElse(null);
     }
- 
-//     int searchPhoneNumber(String tempSearchPhoneNumber){
-
-//         System.out.println("Phone Number: " + tempSearchPhoneNumber);
-
-          
-       
-//         String filePath = "rewardsHistory.txt";
-        
-//         String phoneNumberToSearch = tempSearchPhoneNumber;
-
-//         try {
-
-//             BufferedReader reader = new BufferedReader(new FileReader(filePath));
-//             String line;
-//             while ((line = reader.readLine()) != null) {
-//                 String[] parts = line.split(" ");
-//                 if (parts.length >= 3 && parts[1].equals(phoneNumberToSearch)) {
-//                     String name = parts[0];
-//                     String phoneNumber = parts[1];
-//                     int rewardPoints = Integer.parseInt(parts[2]);
-
-//                     System.out.println("Name: " + name);
-//                     System.out.println("Phone Number: " + phoneNumber);
-//                     System.out.println("Reward Points: " + rewardPoints);
-//                     break;
-//                 }
-//             }
-
-//             // Close the file
-//             reader.close();
-//         } catch (IOException e) {
-//             e.printStackTrace();
-//         }
-           
-
-// return 1; 
-//     }
-
-
-
-
     private void setActivePanel(JPanel panel){
         this.remove(activePanel);
         this.activePanel = panel;
@@ -1119,36 +613,20 @@ try{
         this.setVisible(true);
         this.repaint();
     }
-
     protected void onAdminClick(){
-
-        System.out.println("Admin Button Clicked");
-
-        setActivePanel(adminPanel);
+    System.out.println("Admin Button Clicked");
+    setActivePanel(adminPanel);
     }
     protected void finishOnClick(){
-        
-        System.out.println("finish Button Clicked");
-        //setActivePanel(finishPanel);
-
-
+    System.out.println("finish Button Clicked");
     Font myFont = new Font("Ink Free",Font.BOLD,30);
     Color colors[] = new Color[5];
 	colors[4] = new Color(238,238,238);
-
-
-
-// previousCustomerPanelcustomerPhoneOutput.txt
-
 try {
     BufferedReader reader  = new BufferedReader(new FileReader ("finishPageINFO.txt"));
     String line;
-//     if ((line = reader.readLine()) == null){
-// System.out.println("1ame: " );
-//     }
             while (((line = reader.readLine()) != null) ) {
                 String[] parts = line.split(",");
-                //if (okey == 0 ) {
                 if (parts.length >= 3) {
                     String name = parts[0];
                     String phoneNumber = parts[1];
@@ -1156,12 +634,7 @@ try {
                     System.out.println("Name: " + name);
                     System.out.println("Phone Number: " + phoneNumber);
                     System.out.println("Reward Points: " + rewardPoints);
-                    
-                    
-
-
                     String lastLine = null;
-
                     while ((line = reader.readLine()) != null) {
                         lastLine = line;
                     }
@@ -1171,52 +644,39 @@ try {
                     } else {
                         System.out.println("The file is empty.");
                     }
-
                         System.out.println("TOTAL: " + lastLine);
 
-
-
-
-
-
-
-
-
  JFrame finishframe = new JFrame("Finish Page");  
-
     finishPanel = new JPanel();
-
     JTextField totalFinishPanel;
     JTextField  nameFinishPanel;
     JTextField  phoneNumberFinishPanel;
     JTextField  emailFinishPanel;
     JTextField  rewardPointsFinishPanel;
-   
 
-
-        totalFinishPanel = new JTextField();
-        nameFinishPanel = new JTextField();
-        phoneNumberFinishPanel = new JTextField();
-        emailFinishPanel = new JTextField();
-        rewardPointsFinishPanel = new JTextField();
-        rewardPointsFinishPanel.setFont(myFont);
-        totalFinishPanel.setFont(myFont);
+    totalFinishPanel = new JTextField();
+    nameFinishPanel = new JTextField();
+    phoneNumberFinishPanel = new JTextField();
+    emailFinishPanel = new JTextField();
+    rewardPointsFinishPanel = new JTextField();
+    rewardPointsFinishPanel.setFont(myFont);
+    totalFinishPanel.setFont(myFont);
 
     JButton logofinishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
     JButton logo2finishPanel=new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\logoICY.png")); 
 
     JButton finishPanelAdminButton= new JButton(new ImageIcon("Icy Delights\\src\\gui\\recources\\menu-bar-1-64.png"));
-   JButton nameLogo       = new JButton("Enter Your Name Here -->");
-   JButton phoneLogo       = new JButton("Enter Your Phone Number Here -->");
-   JButton emailLogo       = new JButton("Enter Your Email Here -->");
-   JButton totalLogo       = new JButton("Your Total -->");
+    JButton nameLogo       = new JButton("Enter Your Name Here -->");
+    JButton phoneLogo       = new JButton("Enter Your Phone Number Here -->");
+    JButton emailLogo       = new JButton("Enter Your Email Here -->");
+    JButton totalLogo       = new JButton("Your Total -->");
       
-   JButton submitTotalLogo       = new JButton("Place Order");
-   JButton submitNameLogo       = new JButton("Submit");
-   JButton submitPhoneLogo       = new JButton("Submit");
-   JButton submitEmailLogo       = new JButton("Submit");
+    JButton submitTotalLogo       = new JButton("Place Order");
+    JButton submitNameLogo       = new JButton("Submit");
+    JButton submitPhoneLogo       = new JButton("Submit");
+    JButton submitEmailLogo       = new JButton("Submit");
 
-if (name != null){
+    if (name != null){
     nameFinishPanel.setText(name);
    }
    if (phoneNumber != null){
@@ -1229,7 +689,6 @@ if (name != null){
     rewardPointsFinishPanel.setText("Your Reward Points: "+rewardPoints);
    }
  
-
     nameLogo.setFont(myFont);
     phoneLogo.setFont(myFont);
     emailLogo.setFont(myFont);
@@ -1240,7 +699,6 @@ if (name != null){
     submitPhoneLogo.setFont(myFont);
     submitEmailLogo.setFont(myFont);
 
-   
     nameFinishPanel.setFont(myFont);
     phoneNumberFinishPanel.setFont(myFont);
     emailFinishPanel.setFont(myFont);
@@ -1253,8 +711,6 @@ if (name != null){
     phoneLogo.setBackground(colors[4]);
     emailLogo.setBackground(colors[4]);
     totalLogo.setBackground(colors[4]);
-
-   
 
     finishPanel.add(logofinishPanel);
     finishPanel.add(rewardPointsFinishPanel);
@@ -1276,42 +732,10 @@ if (name != null){
     finishPanel.add(totalFinishPanel);
     finishPanel.add(submitTotalLogo);
 
-    // // save  customer name / phone Number / Email in a text file.  write 
-    // try {
-    //     BufferedWriter writer = new BufferedWriter(new FileWriter("customerOutput.txt"));
-    //     writer.write("text write ");
-    //     writer.write("\n here is another line text write ");
-    //     writer.close();
-    // } catch (IOException e1) {
-    //     // TODO Auto-generated catch block
-    //     e1.printStackTrace();
-    // } 
-// reader form the file 
-// try {
-//     BufferedReader reader  = new BufferedReader(new FileReader ("customerOutput.txt"));
-//     String line; 
-//     while ((line = reader.readLine()) != null) {
-//         System.out.println(line);
-//     }
-//    // System.out.println(   reader.readLine());
-//     reader.close(); 
-// } catch (IOException e1) {
-//     // TODO Auto-generated catch block
-//     e1.printStackTrace();
-// }
-
-
- //final String[] customerName = {""};
-
- 
-
     ActionListener submitNameLogoClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            
-           // customerName[0] = nameFinishPanel.getText();
-            System.out.println("Name: " + nameFinishPanel.getText());
-
+        System.out.println("Name: " + nameFinishPanel.getText());
 
 try {
         BufferedWriter writer = new BufferedWriter(new FileWriter("customerNameOutput.txt"));
@@ -1322,18 +746,12 @@ try {
     } 
         }
     };
-
-    
-
     ActionListener submitPhoneLogoClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
         System.out.println("Phone #: " + phoneNumberFinishPanel.getText());
-
-
 try {
         BufferedWriter writer2 = new BufferedWriter(new FileWriter("customerPhone#Output.txt"));
-       // writer2.write("\n");
         writer2.write( phoneNumberFinishPanel.getText() );
         writer2.close();
     } catch (IOException e1) {
@@ -1345,12 +763,9 @@ try {
     ActionListener submitEmailLogoClickListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Email: " + emailFinishPanel.getText());
-
-
+        System.out.println("Email: " + emailFinishPanel.getText());
 try {
         BufferedWriter writer3 = new BufferedWriter(new FileWriter("customerEmailOutput.txt"));
-        //writer3.write("\n");
         writer3.write(emailFinishPanel.getText());
         writer3.close();
     } catch (IOException e1) {
@@ -1358,62 +773,33 @@ try {
     } 
         }
     };
-
-
-
-
     submitNameLogo.addActionListener(submitNameLogoClickListener);
     submitPhoneLogo.addActionListener(submitPhoneLogoClickListener);
     submitEmailLogo.addActionListener(submitEmailLogoClickListener);
-
     finishPanelAdminButton.addActionListener(event -> onLogoutClick());
-
     finishframe.add(finishPanel);  
     finishframe.setSize(1500, 500);  
     finishframe.setLocationRelativeTo(null);  
     finishframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
     finishframe.setVisible(true);
-
-
-
-
-finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
-
-
-
-
-    }
-     
+    finishPanel.setLayout(new GridLayout(5, 3, 20, 30)); 
+    } 
 }
-
-   // System.out.println(   reader.readLine());
     reader.close(); 
 } catch (IOException e1) {
-  
     e1.printStackTrace();
-
-    
 }
-
     }
     protected void onPastOrdersClick(){
-        
         System.out.println("Past Orders Button Clicked");
-
     }
     protected void onCustomerInfoClick(){
-        
         System.out.println("Customer Info Button Clicked");
-        
     }
     protected void onInventoryClick(){
-        
         System.out.println("Inventory Button Clicked");
-
         updateInventoryPanel();
-
         setActivePanel(inventoryPanel);
-
         Object [] inventory = store.inventory();
         System.out.printf("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity");
         for(int x = 0;x<inventory.length;x++){
@@ -1421,56 +807,26 @@ finishPanel.setLayout(new GridLayout(5, 3, 20, 30));
         }
 
     }
-protected void newCustomerClick(){
-        
-        System.out.println("New Customer Clicked");
-
-         setActivePanel(newCustomerPanel);
-
-
+    protected void newCustomerClick(){
+    System.out.println("New Customer Clicked");
+    setActivePanel(newCustomerPanel);
     }
 
     protected void onLogoutClick(){
-        
-        System.out.println("Logout Button Clicked");
-
-        setActivePanel(bootPanel);
-
+    System.out.println("Logout Button Clicked");
+    setActivePanel(bootPanel);
     }
     protected void onCustomerClick(){
-
-        System.out.println("Customer Button Clicked");
-
-        //setActivePanel(customerPanel);
-        setActivePanel(previousOrNewCustomerPanel);
+    System.out.println("Customer Button Clicked");
+    setActivePanel(previousOrNewCustomerPanel);
     }
     protected void orderonCustomerClick(){
-
-        System.out.println(" Order Customer Button Clicked");
-
-        setActivePanel(customerPanel);
-        
+    System.out.println(" Order Customer Button Clicked");
+    setActivePanel(customerPanel);  
     }
-     protected void  previousCustomerPanelClick(){
-
-        System.out.println("Previous Customer Panel Button Clicked");
-
-         setActivePanel(previousCustomerPanel);
-
-    //     JTextField Name = new JTextField();
-    //     JTextField phoneNumber = new JTextField();
-    //     JTextField email = new JTextField();
-
-    //    // JComboBox<ItemType> itemType = new JComboBox(itemTypes);
-
-    //     Object [] infoNeeded = {"Name",Name,"Phone Number",phoneNumber,"Email", email};
-      
-    //     int button = JOptionPane.showConfirmDialog(this, infoNeeded, "PREVOIUS CUSTOMER INFO", JOptionPane.OK_CANCEL_OPTION);
-         
-    //     if(button == JOptionPane.OK_OPTION){
-    //         setActivePanel(customerPanel);
-    //     }
-
+    protected void  previousCustomerPanelClick(){
+    System.out.println("Previous Customer Panel Button Clicked");
+    setActivePanel(previousCustomerPanel);
     }
     
     protected void onProductsClick(){
@@ -1512,15 +868,9 @@ protected void newCustomerClick(){
 
         inventoryPanel.add(addItemButton);
         inventoryPanel.add(returnButton,JPanel.BOTTOM_ALIGNMENT);
-
-        
-        
     }
     protected void updateMenuPanel(){
-        menuPanel.removeAll();
-
-        // menuPanel.add(new JLabel(String.format("%-7s %-20s %-7s %-20s %s%n","Bin #","Label","Price", "Item Type", "Quantity")));
-        
+        menuPanel.removeAll();        
         Object [] inventory = store.inventory();
         for(int x = 0;x<inventory.length;x++){
             inventoryPanel.add(new JLabel(inventory[x].toString()));
@@ -1528,9 +878,6 @@ protected void newCustomerClick(){
 
         menuPanel.add(addProductButton);
         menuPanel.add(returnButton,JPanel.BOTTOM_ALIGNMENT);
-
-        
-        
     }
     protected void onMenuClick(){
 
