@@ -46,6 +46,9 @@ public class Store {
         for(Item item: inventory)
             item.save(bw);
         System.out.println("Checkpoint 2");
+        bw.write(""+customers.size());
+        for(Customer customer: customers)
+            customer.save(bw);
         bw.close();
     }
 

@@ -1,5 +1,7 @@
 package store;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Customer {
@@ -20,6 +22,14 @@ public class Customer {
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+     public void save(BufferedWriter bw) throws IOException {
+        bw.write(""+ phoneNumber + ' ');
+        bw.write(lastName + ' ');
+        bw.write(firstName + ' ');
+        bw.write(email + ' ');
+        bw.write(""+ rewardPoints + '\n');
     }
 
     public void addOrder(long orderNumber, long rewardPoints){
