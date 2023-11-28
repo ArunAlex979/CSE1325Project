@@ -1,5 +1,9 @@
 package store;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Order{
@@ -16,6 +20,13 @@ public class Order{
     public void addItem(Item item){
         this.items.add(item);
         
+    }
+    public void save() throws IOException {
+        String pathname = "Icy Delights\\src\\gui\\recources\\previousOrders\\Order"+orderNumber;
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File(pathname)));
+        bw.write("Order #" + orderNumber+'\n');
+        for(Item item: items)
+        bw.write(item.toString()+'\n');
     }
 
     public void setCustomer(short customerNumber){

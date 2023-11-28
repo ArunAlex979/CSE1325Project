@@ -46,17 +46,21 @@ public class Store {
         for(Item item: inventory)
             item.save(bw);
         System.out.println("Checkpoint 2");
+        bw.write(""+customers.size() + '\n');
+        for(Customer customer: customers)
+            customer.save(bw);
         bw.close();
     }
 
     public void load(BufferedReader br) throws IOException{
         this.name = br.readLine();
         int inventorySize = Integer.parseInt(br.readLine());
-        // ArrayList<Object> read = new ArrayList<Object>();
-        String [] read;
         for(int x = 0;x<inventorySize;x++){
-            read = br.readLine().split(" ");
-            inventory.add(new Item(read[0], ItemType.FLAVOR,Integer.parseInt(read[1]),Integer.parseInt(read[3])));
+            inventory.add(new Item(br.readLine()));
+        }
+        int customerSize = Integer.parseInt(br.readLine());
+        for(int x = 0;x<customerSize;x++){
+            customers.add(new Customer(br.readLine()));
         }
     }
 
