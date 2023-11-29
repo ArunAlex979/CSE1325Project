@@ -44,9 +44,10 @@ public class Customer implements Comparable{
         bw.write(""+ rewardPoints + '\n');
     }
 
-    public void addOrder(long orderNumber, long rewardPoints){
-        this.previousOrders.add(orderNumber);
-        this.rewardPoints += rewardPoints;
+    public void addOrder(Order order){
+        this.previousOrders.add(order.orderNumber());
+        this.rewardPoints += order.numberOfItems()*25;
+        System.out.println(rewardPoints);
     }
 
     public void useReward(long rewardPoints){

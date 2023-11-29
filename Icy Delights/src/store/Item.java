@@ -38,6 +38,18 @@ public class Item {
         nextBinNumber = binNumber + 1;
     }
 
+    public String label(){
+        return label;
+    }
+
+    public int binNumber(){
+        return binNumber;
+    }
+
+    public void buyItem(){
+        amountInStock--;
+    }
+
     public void save(BufferedWriter bw) throws IOException {
         bw.write(label + ' ');
         bw.write(itemType.toString() + ' ');

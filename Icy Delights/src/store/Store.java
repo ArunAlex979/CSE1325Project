@@ -63,7 +63,17 @@ public class Store {
             customers.add(new Customer(br.readLine()));
         }
     }
-
+    public String buyIceCream(String label){
+        System.out.println(inventory.size());
+        for(int x = 0;x<inventory.size();x++){
+            System.out.println(inventory.get(x).label() + " "+ label);
+            if(inventory.get(x).label().equals(label)){
+                inventory.get(x).buyItem();
+                return(inventory.get(x).label());
+            }
+        }
+        return null;
+    }
     public void close(){
         this.name = null;
         customers.clear();
@@ -88,10 +98,9 @@ public class Store {
     }
 
     public void addCustomer(){
-        
         customers.add(new Customer());
     }
-    public Object customers(){
+    public ArrayList<Customer> customers(){
         return this.customers;
     }
 
@@ -100,7 +109,7 @@ public class Store {
     }
 
     public void add(Order order){
-
+        orders.add(order);
     }
 
     public Object orders(){
@@ -111,8 +120,8 @@ public class Store {
         inventory.add(item);
     }
 
-    public Object [] inventory(){
-        return this.inventory.toArray();
+    public ArrayList<Item> inventory(){
+        return this.inventory;
     }
 
 }
