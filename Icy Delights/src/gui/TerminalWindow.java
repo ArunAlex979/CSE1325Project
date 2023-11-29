@@ -422,6 +422,7 @@ public class TerminalWindow  extends JFrame{
     protected void searchPhoneNumber(JTextField inputPhoneNumber){
         String phoneNumberToSearch = inputPhoneNumber.getText();
         String standardizedPhoneNumber = phoneNumberToSearch.replaceAll("[\\s\\-\\(\\)]+", "");
+        try{
         Customer customer = store.findCustomer(Long.parseLong(standardizedPhoneNumber));
         int submit = JOptionPane.showConfirmDialog(this,"Are you looking for " + customer.firstName() + "?","Customer search",JOptionPane.YES_NO_OPTION);
         if(submit == JOptionPane.YES_OPTION){
@@ -429,6 +430,11 @@ public class TerminalWindow  extends JFrame{
             orderonCustomerClick();
             textRow1.setText("Welcome To Icy Delights "+currentCustomer.firstName());
         }
+    }catch(NumberFormatException e){
+        JOptionPane.showMessageDialog(this,"Invalid Phone Number. Please try again.","Invalid Number",JOptionPane.ERROR_MESSAGE);
+
+    }
+    
     }
 
     protected void createFlavorButtons(){
