@@ -384,10 +384,14 @@ public class TerminalWindow  extends JFrame{
         if(button == JOptionPane.OK_OPTION){
             // String firstName, String lastName, String email, Short phoneNumber
             String [] fullName = name.getText().split(" ");
+            if (fullName.length == 2) {
             currentCustomer = new Customer(fullName[0],fullName[1],email.getText(),Long.parseLong(phoneNumber.getText()));
             store.add(currentCustomer);
             orderonCustomerClick();
             textRow1.setText("Welcome To Icy Delights "+currentCustomer.firstName());
+            }
+            else 
+            JOptionPane.showMessageDialog(this,"Invalid name, \"FirstName LastName\" only","Invalid Name",JOptionPane.ERROR_MESSAGE);
         }
         
         if(button == JOptionPane.OK_OPTION){
