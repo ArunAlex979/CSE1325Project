@@ -64,6 +64,10 @@ public class TerminalWindow  extends JFrame{
           System.err.println("Error while writing to file: " +
           e.getMessage());
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7d936a7aa99ec03e4a645364f5e1aa78557f3353
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Admin Panel /////////////////////////////////////////////////////////////////////////////////////
@@ -276,7 +280,11 @@ reader.close();
         // Setup Panel
         customerPanel = new JPanel();
 
+<<<<<<< HEAD
+       // Create Fields
+=======
         // Create Fields
+>>>>>>> 7d936a7aa99ec03e4a645364f5e1aa78557f3353
         TextField textRow1 = new TextField(20);
         TextField textRow2 = new TextField(20);
         TextField textRow3 = new TextField(20);
@@ -326,8 +334,15 @@ reader.close();
         
     // Add Listeners
     customerPanelAdminButton   .addActionListener(event -> onLogoutClick());
+<<<<<<< HEAD
+    
+
+// Add Buttons
+        customerPanel.add(logoCustomerPanel);
+=======
     // Add Buttons
     customerPanel.add(logoCustomerPanel);
+>>>>>>> 7d936a7aa99ec03e4a645364f5e1aa78557f3353
     customerPanel.add(logo2CustomerPanel);
     customerPanel.add(textRow1);
 
@@ -449,6 +464,16 @@ reader.close();
     peach.addActionListener(peachClickListener);
     caramel.addActionListener(caramelClickListener);
    
+<<<<<<< HEAD
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Finish Panel ////////////////////////////////////////////////////////////////////////////////////
+    
+
+
+=======
+>>>>>>> 7d936a7aa99ec03e4a645364f5e1aa78557f3353
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Inventory Panel /////////////////////////////////////////////////////////////////////////////////
 
@@ -672,6 +697,18 @@ try {
     submitTotalLogo   .addActionListener(event -> placeOrderPanelClick());
 
    double exchangeRate = 0.001; // 1000 reward point is $1
+<<<<<<< HEAD
+    double cash = rewardPoints * exchangeRate;
+if (name != null){
+    nameFinishPanel.setText(name);
+   }
+   if (phoneNumber != null){
+    phoneNumberFinishPanel.setText(phoneNumber);
+   }
+    if (lastLine != null){
+    totalFinishPanel.setText("$"+lastLine);
+   }
+=======
    double cash = rewardPoints * exchangeRate;
    if (name != null){
    nameFinishPanel.setText(name);
@@ -685,6 +722,7 @@ try {
    if (rewardPoints != -1){
    rewardPointsFinishPanel.setText("Your Reward Points: "+rewardPoints);
   }
+>>>>>>> 7d936a7aa99ec03e4a645364f5e1aa78557f3353
  
     nameLogo.setFont(myFont);
     phoneLogo.setFont(myFont);
